@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopHub - Multiple Stores, One Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f9fafb; }
+        .hero-gradient { background: linear-gradient(135deg, #f3f0ff 0%, #e0d7ff 100%); }
+        .category-card:hover { border-color: #dfd4f1; color: #d5c2f6; }
+    </style>
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+    <!-- Top Navigation -->
+    <header class="bg-white border-b sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <h1 class="text-2xl font-bold text-purple-700 flex items-center gap-2">
+                    <i class="fas fa-shopping-bag"></i> ShopHub
+                </h1>
+                <div class="hidden md:flex items-center bg-gray-100 rounded-lg px-3 py-2 w-[500px]">
+                    <select class="bg-transparent text-sm border-r border-gray-300 pr-2 mr-2 outline-none">
+                        <option>All Categories</option>
+                    </select>
+                    <input type="text" placeholder="Search for products, brands or stores..." class="bg-transparent flex-grow outline-none text-sm px-2">
+                    <button class="bg-purple-600 text-white p-2 rounded-md hover:bg-purple-700">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="flex items-center gap-6 text-sm font-medium text-gray-700">
+                <a href="#" class="hover:text-purple-600">Become a Vendor</a>
+                <a href="#" class="hover:text-purple-600">Track Order</a>
+                
+                <!-- Updated: Cart Icon now navigates to cart.html -->
+                <a href="cart.html" class="relative group">
+                    <i class="fas fa-shopping-cart text-xl group-hover:text-purple-600 transition-colors"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-purple-600 text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center">0</span>
+                </a>
+                
+                <div id="auth-section">
+                    <a href="login.html" class="bg-gray-100 px-4 py-2 rounded-lg hover:bg-purple-600 hover:text-white transition-all">Login / signup</a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="bg-white border-t">
+            <div class="container mx-auto px-4 flex items-center gap-8 py-2 text-sm font-semibold">
+                <div class="flex gap-6 text-gray-600">
+                    <a href="home.html" class="text-purple-600 border-b-2 border-purple-600">Home</a>
+                    <a href="Men.html" class="text-gray-600 hover:text-purple-600">Men</a>
+                    <a href="Women.html" class="text-gray-600 hover:text-purple-600">Women</a>
+                    <a href="Kids.html" class="text-gray-600 hover:text-purple-600">Kid</a>
+                    <a href="Electronic.html" class="text-gray-600 hover:text-purple-600">Electronic Appliances</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient overflow-hidden">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between min-h-[500px] py-12">
+            <div class="md:w-1/2 space-y-6">
+                <h2 class="text-5xl font-extrabold text-gray-900 leading-tight">
+                    Multiple Stores. <br> <span class="text-purple-600">One Trusted</span> Platform.
+                </h2>
+                <p class="text-gray-600 text-lg max-w-md">
+                    Discover products from independent brands and local businesses.
+                </p>
+                <div class="flex gap-4">
+                    <button class="bg-purple-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-purple-700 shadow-lg">Shop Now</button>
+                    <button class="bg-white text-gray-800 px-8 py-3 rounded-lg font-bold border hover:bg-gray-50 shadow-sm">Explore Stores</button>
+                </div>
+            </div>
+            <div class="md:w-1/2 relative flex justify-center">
+                <div class="absolute w-[450px] h-[450px] bg-purple-200 rounded-full opacity-50 -z-10"></div>
+                <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=80" alt="Shopping Model" class="rounded-full w-[400px] h-[400px] object-cover border-8 border-white shadow-2xl">
+            </div>
+        </div>
+    </section>
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- Slider Container -->
+    <div class="banner-container py-8">
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="Assets/WEBSITE_BANNER_DESKTOP.webp" class="w-full" alt="Banner 3"></div>
+                <div class="swiper-slide"><img src="Assets/NEW_arrival_printed.webp" class="w-full" alt="Banner 2"></div>
+                <div class="swiper-slide"><img src="Assets/bags.jpg" class="w-full" alt="Banner 1"></div>
+                 <div class="swiper-slide"><img src="Assets/appliances.jpg" class="w-full" alt="Banner 4"></div>
+                  <div class="swiper-slide"><img src="Assets/furniture_offer1.jpeg" class="w-full" alt="Banner 5"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        // --- CART BADGE UPDATER ---
+        function updateCartBadge() {
+            const cart = JSON.parse(localStorage.getItem('myShopCart')) || [];
+            const cartBadge = document.getElementById('cart-count');
+            if (cartBadge) {
+                cartBadge.innerText = cart.length;
+            }
+        }
+
+        // --- LOGIN & INITIAL LOAD LOGIC ---
+        window.onload = function() {
+            // Update cart badge from localStorage on page load
+            updateCartBadge();
+
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const userName = localStorage.getItem('userName');
+            const authSection = document.getElementById('auth-section');
+
+            if (isLoggedIn === 'true' && userName) {
+                authSection.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <span class="bg-purple-100 text-purple-700 px-3 py-2 rounded-lg font-bold border border-purple-200">
+                            <i class="fas fa-user-circle"></i> Hi, ${userName}
+                        </span>
+                        <button onclick="logout()" class="text-xs text-red-500 hover:underline">Logout</button>
+                    </div>
+                `;
+            }
+
+            // Initialize Swiper
+            new Swiper(".mySwiper", {
+                pagination: { el: ".swiper-pagination", clickable: true },
+                autoplay: { delay: 3000 }
+            });
+        };
+
+        function logout() {
+            localStorage.clear();
+            window.location.reload();
+        }
+    </script>
+
+    <script src="java script/home.js"></script>
+</body>
+</html>

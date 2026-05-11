@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids Fashion - Shirts Collection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #000;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background-color: #fff;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            color: #000;
+            text-decoration: none;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        #search-input {
+            width: 0;
+            padding: 0;
+            border: none;
+            outline: none;
+            transition: width 0.4s ease, padding 0.4s ease;
+            font-family: 'Montserrat', sans-serif;
+            border-bottom: 1px solid #000;
+            background: transparent;
+        }
+
+        #search-input.active {
+            width: 200px;
+            padding: 5px 10px;
+            margin-right: 10px;
+        }
+
+        .icon {
+            text-decoration: none;
+            color: #000;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon {
+            position: relative;
+            text-decoration: none;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -7px;
+            right: -10px;
+            background-color: #000;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 10px;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        /* --- Page Header --- */
+        .page-header {
+            text-align: center;
+            padding: 60px 0 50px 0;
+        }
+
+        .page-title {
+            font-size: 38px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin: 0 0 10px 0;
+        }
+
+        /* --- Product Grid --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            padding: 0 60px 80px 60px;
+            min-height: 400px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        /* Hidden class for search results */
+        .hidden {
+            display: none !important;
+        }
+
+        .product-image-container {
+            width: 100%;
+            background-color: #f7f7f7;
+            border-radius: 4px;
+            aspect-ratio: 1 / 1.2; 
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        .hover-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 0;
+            gap: 10px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .product-card:hover .hover-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .size-box {
+            border: 1px solid #ddd;
+            padding: 5px 10px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .size-box.selected {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .add-cart-btn {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            width: 85%;
+        }
+
+        @media (max-width: 1024px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .product-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+
+    
+    <nav class="navbar">
+        <a href="kids.html" class="logo">Back</a>
+        <div class="nav-icons">
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search shirts...">
+                <span class="icon" id="search-trigger">🔍</span>
+            </div>
+            
+            <a href="cart.html" class="icon cart-icon" id="cart-link">
+                🛒 <span class="cart-count" id="cart-count">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1 class="page-title">Night Wear</h1>
+    </header>
+
+    <main class="product-grid" id="product-grid">
+        <!-- Card 1 -->
+        <div class="product-card" data-id="1">
+            <div class="product-image-container">
+                <img src="Assets/g1.webp" alt="Classic White Shirt" class="product-image">
+                <div class="hover-overlay">
+                    <div class="size-selection">
+                        <div class="size-box">XXS</div><div class="size-box">XS</div>
+                        <div class="size-box">S</div>
+                    </div>
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Green/White Nightgowns</p>
+             <p class="product-price" data-price="999">₹999</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="product-card" data-id="2">
+            <div class="product-image-container">
+                <img src="Assets/b1.jpg" alt="Light Blue Shirt" class="product-image">
+                <div class="hover-overlay">
+                    <div class="size-selection">
+                       <div class="size-box">XXS</div><div class="size-box">XS</div>
+                        <div class="size-box">S</div>
+                    </div>
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Navy Blue Pajama Sets</p>
+             <p class="product-price" data-price="699">₹699</p>
+        </div>
+
+        <div class="product-card" data-id="3">
+            <div class="product-image-container">
+                <img src="Assets/g2.webp" alt="Beige Shirt" class="product-image">
+                <div class="hover-overlay">
+                    <div class="size-selection">
+                        <div class="size-box">XXS</div><div class="size-box">XS</div>
+                        <div class="size-box">S</div>
+                    </div>
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Pink Nightgowns</p>
+             <p class="product-price" data-price="999">₹999</p>
+        </div>
+
+        <div class="product-card" data-id="4">
+            <div class="product-image-container">
+                <img src="Assets/b2.webp" alt="Navy Blue Shirt" class="product-image">
+                <div class="hover-overlay">
+                    <div class="size-selection">
+                        <div class="size-box">XXS</div><div class="size-box">XS</div>
+                        <div class="size-box">S</div>
+                    </div>
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Black Satin Set Pajama Sets</p>
+             <p class="product-price" data-price="1000">₹1000</p>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image-container">
+                <img src="Assets/g3.jpg" alt="Beige Shirt" class="product-image">
+                <div class="hover-overlay">
+                    <div class="size-selection">
+                      <div class="size-box">XXS</div><div class="size-box">XS</div>
+                        <div class="size-box">S</div>
+                    </div>
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Mint Green Gown</p>
+             <p class="product-price">₹889</p>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image-container">
+                <img src="Assets/b3.jpg" alt="Navy Blue Shirt" class="product-image">
+                <div class="hover-overlay">
+                    <div class="size-selection">
+                       <div class="size-box">XXS</div><div class="size-box">XS</div>
+                        <div class="size-box">S</div>
+                    </div>
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Light Blue Striped Set</p>
+            <p class="product-price">₹799</p>
+        </div>
+
+
+        <div class="product-card">
+            <div class="product-image-container">
+                <img src="Assets/g4.webp" alt="Beige Shirt" class="product-image">
+                <div class="hover-overlay">
+                    <div class="size-selection">
+                        <div class="size-box">XXS</div><div class="size-box">XS</div>
+                        <div class="size-box">S</div>
+                    </div>
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">White Graphic Gown</p>
+           <p class="product-price">₹699</p>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image-container">
+                <img src="Assets/b4.webp" alt="Navy Blue Shirt" class="product-image">
+                <div class="hover-overlay">
+                    <div class="size-selection">
+                        <div class="size-box">XXS</div><div class="size-box">XS</div>
+                        <div class="size-box">S</div>
+                    </div>
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Grey Flannel-Style Set</p>
+             <p class="product-price">₹999</p>
+        </div>
+        
+
+        <div class="product-card">
+            <div class="product-image-container">
+                <img src="Assets/g6.webp" alt="Beige Shirt" class="product-image">
+                <div class="hover-overlay">
+                    <div class="size-selection">
+                        <div class="size-box">XXS</div><div class="size-box">XS</div>
+                        <div class="size-box">S</div>
+                    </div>
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Floral Bloomers Set</p>
+             <p class="product-price">₹899</p>
+        </div>
+
+        <div class="product-card">
+            <div class="product-image-container">
+                <img src="Assets/b5.webp" alt="Navy Blue Shirt" class="product-image">
+                <div class="hover-overlay">
+                    <div class="size-selection">
+                       <div class="size-box">XXS</div><div class="size-box">XS</div>
+                        <div class="size-box">S</div>
+                    </div>
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Navy Pinstripe Set</p>
+             <p class="product-price">₹599</p>
+        </div>
+
+         <div class="product-card">
+            <div class="product-image-container">
+                <img src="Assets/g5.jpg" alt="Navy Blue Shirt" class="product-image">
+                <div class="hover-overlay">
+                    <div class="size-selection">
+                       <div class="size-box">XXS</div><div class="size-box">XS</div>
+                        <div class="size-box">S</div>
+                    </div>
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Seersucker/Striped Set</p>
+             <p class="product-price">₹1209</p>
+        </div>
+
+         <div class="product-card">
+            <div class="product-image-container">
+                <img src="Assets/b6.jpg" alt="Navy Blue Shirt" class="product-image">
+                <div class="hover-overlay">
+                    <div class="size-selection">
+                       <div class="size-box">XXS</div><div class="size-box">XS</div>
+                        <div class="size-box">S</div>
+                    </div>
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Satin Empire Waist Gown</p>
+             <p class="product-price">₹1119</p>
+        </div>
+
+    </main>
+
+    <script>
+        // 1. Initialize Cart
+        let cart = JSON.parse(localStorage.getItem('myShopCart')) || [];
+        updateCartDisplay();
+
+        // 2. SEARCH LOGIC
+        const searchTrigger = document.getElementById('search-trigger');
+        const searchInput = document.getElementById('search-input');
+        const productCards = document.querySelectorAll('.product-card');
+
+        // Toggle search bar visibility
+        searchTrigger.addEventListener('click', () => {
+            searchInput.classList.toggle('active');
+            if (searchInput.classList.contains('active')) {
+                searchInput.focus();
+            }
+        });
+
+        // Filter products as user types
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+
+            productCards.forEach(card => {
+                const productName = card.querySelector('.product-name').innerText.toLowerCase();
+                if (productName.includes(query)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+
+        // 3. Handle Size Selection
+        document.querySelectorAll('.size-box').forEach(box => {
+            box.addEventListener('click', function(e) {
+                e.preventDefault();
+                this.parentElement.querySelectorAll('.size-box').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // 4. Handle Add to Cart
+        document.querySelectorAll('.add-cart-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const card = this.closest('.product-card');
+                const selectedSizeBox = card.querySelector('.size-box.selected');
+
+                if (!selectedSizeBox) {
+                    alert('Please select a size first!');
+                    return;
+                }
+
+                const priceElement = card.querySelector('.product-price');
+                const priceValue = priceElement.getAttribute('data-price') || "49.99";
+
+                const product = {
+                    id: (card.getAttribute('data-id') || Date.now()) + "-" + selectedSizeBox.innerText,
+                    name: card.querySelector('.product-name').innerText,
+                    price: priceValue,
+                    image: card.querySelector('.product-image').getAttribute('src'),
+                    size: selectedSizeBox.innerText
+                };
+
+                cart.push(product);
+                localStorage.setItem('myShopCart', JSON.stringify(cart));
+                updateCartDisplay();
+                alert(`${product.name} added to cart!`);
+            });
+        });
+
+        function updateCartDisplay() {
+            const countElement = document.getElementById('cart-count');
+            if(countElement) countElement.innerText = cart.length;
+        }
+    </script>
+</body>
+</html>

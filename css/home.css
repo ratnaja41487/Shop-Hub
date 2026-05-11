@@ -1,0 +1,33 @@
+/* Container Spacing */
+.swiper {
+    width: 100%;
+    padding-top: 200px;
+    padding-bottom: 50px !important; /* Space for the dots */
+}
+
+.swiper-slide {
+    transition: transform 0.3s;
+    display: flex;
+    justify-content: center;
+}
+
+/* Make all images same height and rounded */
+.swiper-slide img {
+    width: 100%;
+    height: 700px; /* Exact height for desktop */
+    object-fit: cover; /* Prevents stretching */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Custom Purple Pagination Dots */
+.swiper-pagination-bullet {
+    background: #ccc;
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+    background: #7c3aed !important; /* ShopHub Purple */
+    width: 20px;
+    border-radius: 4px;
+}

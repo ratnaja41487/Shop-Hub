@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids Fashion-Elevate Your Style</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;600&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, .serif { font-family: 'Playfair Display', serif; }
+        
+        .hero-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://shopkyosho.com/wp-content/uploads/2019/03/Kids-Clothing.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .text-overlay {
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        #search-input {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+
+    <!-- Top Announcement -->
+    <div class="bg-gray-100 py-2 text-center text-xs tracking-widest uppercase border-b">
+        Free Shipping on Orders Over $100
+    </div>
+
+    <!-- Navigation -->
+    <nav class="flex items-center justify-between px-10 py-6 sticky top-0 bg-white z-50 shadow-sm">
+        <div class="text-2xl font-bold tracking-tighter uppercase">Kids Fashion</div>
+        
+        <ul class="hidden md:flex space-x-8 text-sm font-medium uppercase tracking-wider">
+            <li><a href="home.html" class="hover:text-gray-500">Home</a></li>
+            <li><a href="kids.html" class="hover:text-gray-500">Shop</a></li>
+            <li><a href="lookbook2.html" class="border-b border-black">Lookbook</a></li>
+        </ul>
+
+        <div class="flex space-x-5 text-lg items-center">
+            <div class="relative flex items-center">
+                <input type="text" id="search-input" placeholder="Search categories..." 
+                       class="w-0 opacity-0 border-b border-black outline-none text-sm px-2 focus:w-40 focus:opacity-100">
+                <i class="fa-solid fa-magnifying-glass cursor-pointer" id="search-icon"></i>
+            </div>
+
+            <a href="cart.html" class="relative cursor-pointer">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span id="cart-count" class="absolute -top-2 -right-2 bg-black text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center" style="display: none;">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-[85vh] flex items-center text-white px-10 hero-bg">
+        <div class="max-w-xl text-overlay">
+            <p class="uppercase tracking-widest text-sm mb-4">New Collection</p>
+            <h1 class="text-6xl mb-6 leading-tight">Sprinkling a little magic on every outfit</h1>
+            <p class="mb-8 text-lg opacity-90">Small clothes for big dreams</p>
+            <div class="flex space-x-4">
+                <button class="add-to-cart-btn bg-white text-black px-8 py-3 font-semibold uppercase text-sm hover:bg-gray-200 transition">Shop Now</button>
+                <a href="lookbook2.html" class="border border-white text-white px-8 py-3 font-semibold uppercase text-sm hover:bg-white hover:text-black transition flex items-center justify-center">
+                    Explore Lookbook
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="grid grid-cols-1 md:grid-cols-4 gap-4 p-10" id="category-grid">
+        <a href="girls.html" class="category-card relative group cursor-pointer overflow-hidden bg-gray-100" data-name="Shirts">
+            <img src="Assets/gd13.webp" alt="Shirts" class="w-full h-80 object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute top-8 left-8 text-overlay">
+                <h3 class="text-xl font-bold uppercase tracking-tighter text-white">Girls</h3>
+                <p class="text-xs border-b border-white text-white inline-block pb-1 mt-1">Explore Now</p>
+            </div>
+        </a>
+
+        <a href="boys.html" class="category-card relative group cursor-pointer overflow-hidden bg-gray-100" data-name="Shoes">
+            <img src="Assets/by9.webp" alt="Shoes" class="w-full h-80 object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute top-8 left-8 text-overlay">
+                <h3 class="text-xl font-bold uppercase tracking-tighter text-white">Boys</h3>
+                <p class="text-xs border-b border-white text-white inline-block pb-1 mt-1">Explore Now</p>
+            </div>
+        </a>
+
+        <a href="casuals.html" class="category-card relative group cursor-pointer overflow-hidden bg-gray-100 block" data-name="Pants">
+            <img src="Assets/casula_d1.webp" alt="Pants" class="w-full h-80 object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute top-8 left-8 text-overlay">
+                <h3 class="text-xl font-bold uppercase tracking-tighter text-white">Casuals</h3>
+                <p class="text-xs border-b border-white text-white inline-block pb-1 mt-1">Explore Now</p>
+            </div>
+        </a>
+
+        <a href="toys.html" class="category-card relative group cursor-pointer overflow-hidden bg-gray-100 block" data-name="Jackets">
+            <img src="Assets/toys_main.jpg" alt="Jackets" class="w-full h-80 object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute top-8 left-8 text-overlay">
+                <h3 class="text-xl font-bold uppercase tracking-tighter text-white">Toys</h3>
+                <p class="text-xs border-b border-white text-white inline-block pb-1 mt-1">Explore Now</p>
+            </div>
+        </a>
+    </section>
+
+    <!-- Sale Banner with Video -->
+   <section class="mx-10 my-10 bg-black text-white flex flex-col md:flex-row items-center overflow-hidden h-[400px]">
+    <div class="w-full md:w-1/2 h-full relative">
+        <!-- Photo replaces the Video -->
+        <img 
+            src="Assets/last_kid.webp" 
+            alt="Season Sale" 
+            class="w-full h-full object-cover opacity-80">
+    </div>
+    <div class="w-full md:w-1/2 p-16">
+        <p class="uppercase tracking-widest text-xs mb-2">Limited Time Offer</p>
+        <h2 class="text-5xl mb-6">Season Sale<br>Up to 40% Off</h2>
+        <button class="add-to-cart-btn bg-white text-black px-10 py-3 font-bold text-xs uppercase hover:bg-gray-200 transition">Shop The Sale</button>
+    </div>
+</section>
+
+    <script>
+        const cartBadge = document.getElementById('cart-count');
+        const searchIcon = document.getElementById('search-icon');
+        const searchInput = document.getElementById('search-input');
+
+        // --- 1. SEARCH FUNCTIONALITY ---
+        searchIcon.addEventListener('click', () => {
+            searchInput.focus();
+            searchInput.classList.toggle('w-0');
+            searchInput.classList.toggle('opacity-0');
+            searchInput.classList.toggle('w-40');
+            searchInput.classList.toggle('opacity-100');
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            document.querySelectorAll('.category-card').forEach(card => {
+                const name = card.getAttribute('data-name').toLowerCase();
+                card.style.display = name.includes(query) ? "block" : "none";
+            });
+        });
+
+        // --- 2. CART LOGIC ---
+        function updateCartDisplay() {
+            let cart = JSON.parse(localStorage.getItem('myShopCart')) || [];
+            if (cartBadge) {
+                cartBadge.textContent = cart.length;
+                cartBadge.style.display = cart.length > 0 ? 'flex' : 'none';
+            }
+        }
+
+        // FIXED: Only add to cart when clicking actual shop buttons, NOT category links
+        function handleCartAdd(event) {
+            let cart = JSON.parse(localStorage.getItem('myShopCart')) || [];
+            const product = {
+                name: "Sale Item",
+                price: "1200",
+                image: "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&q=80&w=200"
+            };
+            cart.push(product);
+            localStorage.setItem('myShopCart', JSON.stringify(cart));
+            updateCartDisplay();
+            alert("Added Sale Item to Cart!");
+        }
+
+        // Only attach the add function to the SHOP buttons
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            btn.addEventListener('click', handleCartAdd);
+        });
+
+        updateCartDisplay();
+    </script>
+</body>
+</html>s

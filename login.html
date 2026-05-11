@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ShopHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-10 rounded-2xl shadow-xl w-full max-w-md">
+        <a href="home.html" class="text-2xl font-bold text-purple-700 flex items-center gap-2 mb-8">
+            <i class="fas fa-shopping-bag"></i> ShopHub
+        </a>
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-2">Welcome Back</h2>
+        <p class="text-gray-600 mb-8">Enter your email to login.</p>
+
+        <form id="loginForm" class="space-y-6">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Email Address</label>
+                <input type="email" id="emailInput" required class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-purple-500 outline-none" placeholder="Email Id">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" required class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-purple-500 outline-none" placeholder="••••••••">
+            </div>
+            <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg font-bold hover:bg-purple-700 transition-all">Login</button>
+        </form>
+
+        <!-- ADDED THIS SECTION BELOW -->
+        <div class="mt-6 text-center border-t pt-4">
+            <p class="text-sm text-gray-600">
+                Don't have an account? 
+                <a href="signup.html" class="font-bold text-purple-600 hover:underline">Create Account</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+       document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('emailInput').value;
+    const password = document.querySelector('input[type="password"]').value;
+
+    // Retrieve the stored user data
+    const storedUser = localStorage.getItem(email);
+
+    if (storedUser) {
+        const userData = JSON.parse(storedUser);
+
+        // Check if the password matches
+        if (userData.password === password) {
+            localStorage.setItem('userName', userData.name);
+            localStorage.setItem('isLoggedIn', 'true');
+            window.location.href = 'home.html';
+        } else {
+            alert("Invalid password. Please try again.");
+        }
+    } else {
+        alert("No account found with this email. Please sign up.");
+    }
+});
+    </script>
+</body>
+</html>

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Fashion - Jewelry Collection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #000;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background-color: #fff;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f0f0f0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            color: #000;
+            text-decoration: none;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        #search-input {
+            width: 0;
+            padding: 0;
+            border: none;
+            outline: none;
+            transition: width 0.4s ease, padding 0.4s ease;
+            font-family: 'Montserrat', sans-serif;
+            border-bottom: 1px solid #000;
+            background: transparent;
+        }
+
+        #search-input.active {
+            width: 200px;
+            padding: 5px 10px;
+            margin-right: 10px;
+        }
+
+        .icon {
+            text-decoration: none;
+            color: #000;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -7px;
+            right: -10px;
+            background-color: #000;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 10px;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        /* --- Page Header --- */
+        .page-header {
+            text-align: center;
+            padding: 60px 0 50px 0;
+        }
+
+        .page-title {
+            font-size: 38px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin: 0 0 10px 0;
+        }
+
+        /* --- Product Grid --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            padding: 0 60px 80px 60px;
+            min-height: 400px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .hidden { display: none !important; }
+
+        .product-image-container {
+            width: 100%;
+            background-color: #f7f7f7;
+            border-radius: 4px;
+            aspect-ratio: 1 / 1.2; 
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .product-card:hover .product-image { transform: scale(1.1); }
+
+        .hover-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            gap: 10px;
+            transform: translateY(100%);
+            transition: transform 0.4s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .product-card:hover .hover-overlay {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .size-selection {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+
+        .size-box {
+            border: 1px solid #ddd;
+            padding: 5px 10px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .size-box.selected {
+            background-color: #000;
+            color: #fff;
+            border-color: #000;
+        }
+
+        .add-cart-btn {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            width: 85%;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: background 0.3s;
+        }
+
+        .add-cart-btn:hover { background-color: #333; }
+
+        .product-name { font-weight: 500; margin: 0; }
+        .product-price { color: #666; margin: 5px 0; }
+
+        @media (max-width: 1024px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .product-grid { grid-template-columns: 1fr; } .navbar { padding: 20px; } }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="women.html" class="logo">BACK</a>
+        <div class="nav-icons">
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search jewelry...">
+                <span class="icon" id="search-trigger">🔍</span>
+            </div>
+            
+            <a href="cart.html" class="icon cart-icon">
+                🛒 <span class="cart-count" id="cart-count">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1 class="page-title">Luxury Jewelry</h1>
+        <p>Premium pieces for the modern man</p>
+    </header>
+
+    <main class="product-grid" id="product-grid">
+        <!-- Item 1: No Size required -->
+        <div class="product-card" data-id="j1">
+            <div class="product-image-container">
+                <img src="Assets/jewellery1.jpg" alt="Cuban Link Chain" class="product-image">
+                <div class="hover-overlay">
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Statement Set</p>
+            <p class="product-price" data-price="6999">₹6999</p>
+        </div>
+
+        <!-- Item 2: Ring with Sizes -->
+        <div class="product-card" data-id="j2">
+            <div class="product-image-container">
+                <img src="Assets/jewellery_ring.jpg" alt="Signet Ring" class="product-image">
+                <div class="hover-overlay">
+                    <div class="size-selection">
+                        <div class="size-box">3</div><div class="size-box">3.5</div>
+                        <div class="size-box">4</div><div class="size-box">4.5</div>
+                    </div>
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Rings</p>
+            <p class="product-price" data-price="999">₹999</p>
+        </div>
+
+        <!-- Item 3: Bracelet -->
+        <div class="product-card" data-id="j3">
+            <div class="product-image-container">
+                <img src="Assets/jewellery11.webp" alt="Leather Bracelet" class="product-image">
+                <div class="hover-overlay">
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Chandbalis</p>
+            <p class="product-price" data-price="499">₹499</p>
+        </div>
+
+        <!-- Item 4: Pendant -->
+        <div class="product-card" data-id="j4">
+            <div class="product-image-container">
+                <img src="Assets/jewellery2.jpg" alt="Compass Pendant" class="product-image">
+                <div class="hover-overlay">
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Layered Necklace</p>
+            <p class="product-price" data-price="5999">₹5999</p>
+        </div>
+
+        <div class="product-card" data-id="j4">
+            <div class="product-image-container">
+                <img src="Assets/jewellery3.webp" alt="Compass Pendant" class="product-image">
+                <div class="hover-overlay">
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Temple Set</p>
+            <p class="product-price" data-price="7999">₹7999</p>
+        </div>
+
+
+        <div class="product-card" data-id="j4">
+            <div class="product-image-container">
+                <img src="Assets/jewellery4.webp" alt="Compass Pendant" class="product-image">
+                <div class="hover-overlay">
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Choker</p>
+            <p class="product-price" data-price="999">₹999</p>
+        </div>
+
+
+        <div class="product-card" data-id="j4">
+            <div class="product-image-container">
+                <img src="Assets/jewellery10.webp" alt="Compass Pendant" class="product-image">
+                <div class="hover-overlay">
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Ear Chains</p>
+            <p class="product-price" data-price="699">₹699</p>
+        </div>
+
+
+        <div class="product-card" data-id="j4">
+            <div class="product-image-container">
+                <img src="Assets/jewellery6.jpg" alt="Compass Pendant" class="product-image">
+                <div class="hover-overlay">
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Pendant</p>
+            <p class="product-price" data-price="399">₹399</p>
+        </div>
+
+        <div class="product-card" data-id="j4">
+            <div class="product-image-container">
+                <img src="Assets/jewellery7.jpeg" alt="Compass Pendant" class="product-image">
+                <div class="hover-overlay">
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Hoops</p>
+            <p class="product-price" data-price="399">₹399</p>
+        </div>
+
+
+        <div class="product-card" data-id="j4">
+            <div class="product-image-container">
+                <img src="Assets/jewellery9.jpg" alt="Compass Pendant" class="product-image">
+                <div class="hover-overlay">
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Jhumkas</p>
+            <p class="product-price" data-price="499">₹499</p>
+        </div>
+
+
+        <div class="product-card" data-id="j4">
+            <div class="product-image-container">
+                <img src="Assets/jewellery10.avif" alt="Compass Pendant" class="product-image">
+                <div class="hover-overlay">
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Chandbalis</p>
+            <p class="product-price" data-price="599">₹599</p>
+        </div>
+
+
+        <div class="product-card" data-id="j4">
+            <div class="product-image-container">
+                <img src="Assets/jewellery12.avif" alt="Compass Pendant" class="product-image">
+                <div class="hover-overlay">
+                    <button class="add-cart-btn">ADD TO CART</button>
+                </div>
+            </div>
+            <p class="product-name">Jhumkas</p>
+            <p class="product-price" data-price="699">₹699</p>
+        </div>
+
+    </main>
+
+    <script>
+        // 1. Initialize Cart
+        let cart = JSON.parse(localStorage.getItem('myShopCart')) || [];
+        updateCartDisplay();
+
+        // 2. Search Logic
+        const searchTrigger = document.getElementById('search-trigger');
+        const searchInput = document.getElementById('search-input');
+        const productCards = document.querySelectorAll('.product-card');
+
+        searchTrigger.addEventListener('click', () => {
+            searchInput.classList.toggle('active');
+            if (searchInput.classList.contains('active')) searchInput.focus();
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            productCards.forEach(card => {
+                const name = card.querySelector('.product-name').innerText.toLowerCase();
+                card.classList.toggle('hidden', !name.includes(query));
+            });
+        });
+
+        // 3. Size Selection (only if sizes exist)
+        document.querySelectorAll('.size-box').forEach(box => {
+            box.addEventListener('click', function() {
+                this.parentElement.querySelectorAll('.size-box').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // 4. Handle Add to Cart (Improved)
+        document.querySelectorAll('.add-cart-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const card = this.closest('.product-card');
+                const selectedSize = card.querySelector('.size-box.selected');
+                
+                // If a size selection exists but none is picked, alert the user.
+                // If no size selection exists at all (like chains), default to "One Size".
+                const sizeSelectionGroup = card.querySelector('.size-selection');
+                let finalSize = "One Size";
+
+                if (sizeSelectionGroup) {
+                    if (!selectedSize) {
+                        alert('Please select a size first!');
+                        return;
+                    }
+                    finalSize = selectedSize.innerText;
+                }
+
+                const product = {
+                    id: (card.getAttribute('data-id') || Date.now()) + "-" + finalSize,
+                    name: card.querySelector('.product-name').innerText,
+                    price: card.querySelector('.product-price').getAttribute('data-price') || "49.99",
+                    image: card.querySelector('.product-image').getAttribute('src'),
+                    size: finalSize
+                };
+
+                cart.push(product);
+                localStorage.setItem('myShopCart', JSON.stringify(cart));
+                updateCartDisplay();
+                alert(`${product.name} added to cart!`);
+            });
+        });
+
+        function updateCartDisplay() {
+            const countElement = document.getElementById('cart-count');
+            if(countElement) countElement.innerText = cart.length;
+        }
+    </script>
+</body>
+</html>
