@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | ShopHub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; background-color: #f9fafb; }
+    .step-active { background: #7c3aed; color: white; }
+    .step-done { background: #10b981; color: white; }
+    .step-inactive { background: #e5e7eb; color: #9ca3af; }
+    .input-field { width: 100%; border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px 16px; font-size: 14px; outline: none; transition: border-color 0.2s; }
+    .input-field:focus { border-color: #7c3aed; box-shadow: 0 0 0 3px rgba(124,58,237,0.08); }
+    .payment-option { border: 2px solid #e5e7eb; border-radius: 12px; padding: 14px 18px; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+    .payment-option:hover { border-color: #c4b5fd; }
+    .payment-option.selected { border-color: #7c3aed; background: #faf5ff; }
+    /* Success overlay */
+    #success-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; align-items: center; justify-content: center; }
+    #success-overlay.show { display: flex; }
+    @keyframes popIn { from { transform: scale(0.7); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .success-card { animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="bg-white border-b sticky top-0 z-50 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="home.html" class="text-xl font-bold text-purple-700 flex items-center gap-2">
+        <i class="fas fa-shopping-bag"></i> ShopHub
+      </a>
+      <div class="flex items-center gap-2 text-sm text-gray-500">
+        <i class="fas fa-lock text-green-500"></i>
+        <span>Secure Checkout</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Progress Steps -->
+  <div class="max-w-5xl mx-auto px-4 py-6">
+    <div class="flex items-center justify-center gap-0 mb-8">
+      <div class="flex items-center gap-2">
+        <div id="step1-circle" class="step-active w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">1</div>
+        <span id="step1-label" class="text-sm font-semibold text-purple-700">Address</span>
+      </div>
+      <div class="w-12 h-0.5 bg-gray-200 mx-2" id="line1"></div>
+      <div class="flex items-center gap-2">
+        <div id="step2-circle" class="step-inactive w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">2</div>
+        <span id="step2-label" class="text-sm font-semibold text-gray-400">Payment</span>
+      </div>
+      <div class="w-12 h-0.5 bg-gray-200 mx-2" id="line2"></div>
+      <div class="flex items-center gap-2">
+        <div id="step3-circle" class="step-inactive w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">3</div>
+        <span id="step3-label" class="text-sm font-semibold text-gray-400">Review</span>
+      </div>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-8">
+
+      <!-- Left: Steps Content -->
+      <div class="flex-1">
+
+        <!-- STEP 1: Delivery Address -->
+        <div id="panel-1" class="bg-white rounded-2xl shadow-sm p-6 md:p-8">
+          <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+            <i class="fas fa-map-marker-alt text-purple-600"></i> Delivery Address
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">First Name *</label>
+              <input type="text" id="fname" class="input-field" placeholder="Ravi">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Last Name *</label>
+              <input type="text" id="lname" class="input-field" placeholder="Kumar">
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+              <input type="tel" id="phone" class="input-field" placeholder="+91 9876543210">
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-sm font-medium text-gray-700 mb-1">Address Line 1 *</label>
+              <input type="text" id="addr1" class="input-field" placeholder="House No, Street, Area">
+            </div>
+            <div class="md:col-span-2">
+              <label class="block text-sm font-medium text-gray-700 mb-1">Address Line 2</label>
+              <input type="text" id="addr2" class="input-field" placeholder="Landmark (optional)">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">City *</label>
+              <input type="text" id="city" class="input-field" placeholder="Hyderabad">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">State *</label>
+              <select id="state" class="input-field bg-white">
+                <option value="">Select State</option>
+                <option>Andhra Pradesh</option><option>Telangana</option><option>Karnataka</option>
+                <option>Tamil Nadu</option><option>Maharashtra</option><option>Delhi</option>
+                <option>Gujarat</option><option>Rajasthan</option><option>Uttar Pradesh</option>
+                <option>West Bengal</option><option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">PIN Code *</label>
+              <input type="text" id="pin" class="input-field" placeholder="500001" maxlength="6">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1">Address Type</label>
+              <div class="flex gap-3 mt-2">
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="addrtype" value="Home" checked class="accent-purple-600"> <span class="text-sm">Home</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="addrtype" value="Work" class="accent-purple-600"> <span class="text-sm">Work</span>
+                </label>
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input type="radio" name="addrtype" value="Other" class="accent-purple-600"> <span class="text-sm">Other</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <p id="addr-error" class="text-red-500 text-sm mt-3 hidden">Please fill all required fields.</p>
+
+          <button onclick="goToStep(2)" class="mt-6 w-full bg-purple-600 text-white py-3 rounded-xl font-bold hover:bg-purple-700 transition-all">
+            Continue to Payment <i class="fas fa-arrow-right ml-2"></i>
+          </button>
+        </div>
+
+        <!-- STEP 2: Payment -->
+        <div id="panel-2" class="hidden bg-white rounded-2xl shadow-sm p-6 md:p-8">
+          <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+            <i class="fas fa-credit-card text-purple-600"></i> Payment Method
+          </h2>
+
+          <div class="space-y-3 mb-6">
+            <div class="payment-option selected" onclick="selectPayment(this,'upi')">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                  <i class="fas fa-mobile-alt text-purple-600"></i>
+                </div>
+                <div class="flex-1">
+                  <p class="font-semibold text-gray-900 text-sm">UPI</p>
+                  <p class="text-xs text-gray-500">GPay, PhonePe, Paytm, BHIM</p>
+                </div>
+                <div class="w-5 h-5 rounded-full border-2 border-purple-600 flex items-center justify-center" id="radio-upi">
+                  <div class="w-2.5 h-2.5 rounded-full bg-purple-600"></div>
+                </div>
+              </div>
+              <div id="upi-input" class="mt-3">
+                <input type="text" class="input-field" placeholder="Enter UPI ID (e.g. name@upi)">
+              </div>
+            </div>
+
+            <div class="payment-option" onclick="selectPayment(this,'card')">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <i class="fas fa-credit-card text-blue-600"></i>
+                </div>
+                <div class="flex-1">
+                  <p class="font-semibold text-gray-900 text-sm">Credit / Debit Card</p>
+                  <p class="text-xs text-gray-500">Visa, Mastercard, RuPay</p>
+                </div>
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center" id="radio-card"></div>
+              </div>
+              <div id="card-input" class="hidden mt-3 space-y-3">
+                <input type="text" class="input-field" placeholder="Card Number" maxlength="19">
+                <div class="flex gap-3">
+                  <input type="text" class="input-field" placeholder="MM/YY" maxlength="5">
+                  <input type="text" class="input-field" placeholder="CVV" maxlength="3">
+                </div>
+                <input type="text" class="input-field" placeholder="Name on Card">
+              </div>
+            </div>
+
+            <div class="payment-option" onclick="selectPayment(this,'netbanking')">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                  <i class="fas fa-university text-green-600"></i>
+                </div>
+                <div class="flex-1">
+                  <p class="font-semibold text-gray-900 text-sm">Net Banking</p>
+                  <p class="text-xs text-gray-500">All major Indian banks</p>
+                </div>
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center" id="radio-netbanking"></div>
+              </div>
+              <div id="netbanking-input" class="hidden mt-3">
+                <select class="input-field bg-white">
+                  <option value="">Select Bank</option>
+                  <option>SBI</option><option>HDFC Bank</option><option>ICICI Bank</option>
+                  <option>Axis Bank</option><option>Kotak Bank</option><option>Bank of Baroda</option>
+                  <option>Punjab National Bank</option><option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="payment-option" onclick="selectPayment(this,'cod')">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
+                  <i class="fas fa-money-bill-wave text-yellow-600"></i>
+                </div>
+                <div class="flex-1">
+                  <p class="font-semibold text-gray-900 text-sm">Cash on Delivery</p>
+                  <p class="text-xs text-gray-500">Pay when your order arrives</p>
+                </div>
+                <div class="w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center" id="radio-cod"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex gap-3">
+            <button onclick="goToStep(1)" class="flex-1 border border-gray-300 text-gray-700 py-3 rounded-xl font-bold hover:bg-gray-50 transition-all">
+              <i class="fas fa-arrow-left mr-2"></i> Back
+            </button>
+            <button onclick="goToStep(3)" class="flex-1 bg-purple-600 text-white py-3 rounded-xl font-bold hover:bg-purple-700 transition-all">
+              Review Order <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Review & Place Order -->
+        <div id="panel-3" class="hidden bg-white rounded-2xl shadow-sm p-6 md:p-8">
+          <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+            <i class="fas fa-clipboard-check text-purple-600"></i> Review Your Order
+          </h2>
+
+          <!-- Address Preview -->
+          <div class="bg-gray-50 rounded-xl p-4 mb-4">
+            <div class="flex justify-between items-start">
+              <div>
+                <p class="text-xs text-gray-500 font-semibold uppercase mb-1">Delivering to</p>
+                <p class="font-bold text-gray-900" id="review-name"></p>
+                <p class="text-sm text-gray-600 mt-0.5" id="review-addr"></p>
+                <p class="text-sm text-gray-600" id="review-pinstate"></p>
+                <p class="text-sm text-gray-600" id="review-phone"></p>
+              </div>
+              <button onclick="goToStep(1)" class="text-xs text-purple-600 font-bold hover:underline">Edit</button>
+            </div>
+          </div>
+
+          <!-- Payment Preview -->
+          <div class="bg-gray-50 rounded-xl p-4 mb-6">
+            <div class="flex justify-between items-center">
+              <div>
+                <p class="text-xs text-gray-500 font-semibold uppercase mb-1">Payment</p>
+                <p class="font-bold text-gray-900" id="review-payment"></p>
+              </div>
+              <button onclick="goToStep(2)" class="text-xs text-purple-600 font-bold hover:underline">Edit</button>
+            </div>
+          </div>
+
+          <!-- Order Items -->
+          <div id="review-items" class="space-y-3 mb-6 max-h-64 overflow-y-auto"></div>
+
+          <!-- Final Total -->
+          <div class="border-t pt-4 mb-6 space-y-1 text-sm text-gray-600">
+            <div class="flex justify-between"><span>Subtotal</span><span>₹<span id="r-subtotal">0</span></span></div>
+            <div class="flex justify-between"><span>Delivery</span><span id="r-delivery" class="text-green-600">FREE</span></div>
+            <div class="flex justify-between"><span>Discount</span><span class="text-green-600">-₹<span id="r-discount">0</span></span></div>
+            <div class="flex justify-between text-base font-bold text-gray-900 pt-2 border-t">
+              <span>Total Payable</span>
+              <span class="text-purple-700">₹<span id="r-total">0</span></span>
+            </div>
+          </div>
+
+          <div class="flex gap-3">
+            <button onclick="goToStep(2)" class="flex-1 border border-gray-300 text-gray-700 py-3 rounded-xl font-bold hover:bg-gray-50 transition-all">
+              <i class="fas fa-arrow-left mr-2"></i> Back
+            </button>
+            <button onclick="placeOrder()" class="flex-1 bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition-all">
+              <i class="fas fa-check-circle mr-2"></i> Place Order
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: Cart Summary Sidebar -->
+      <div class="lg:w-72">
+        <div class="bg-white rounded-2xl shadow-sm p-5 sticky top-24">
+          <h3 class="font-bold text-gray-900 mb-4 text-sm border-b pb-3">Your Items</h3>
+          <div id="sidebar-items" class="space-y-3 max-h-80 overflow-y-auto mb-4"></div>
+          <div class="border-t pt-3 text-sm text-gray-600 space-y-1">
+            <div class="flex justify-between"><span>Subtotal</span><span>₹<span id="sb-subtotal">0</span></span></div>
+            <div class="flex justify-between font-bold text-gray-900"><span>Total</span><span class="text-purple-700">₹<span id="sb-total">0</span></span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Success Overlay -->
+  <div id="success-overlay">
+    <div class="success-card bg-white rounded-3xl p-10 max-w-sm w-full mx-4 text-center shadow-2xl">
+      <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <i class="fas fa-check text-green-500 text-4xl"></i>
+      </div>
+      <h2 class="text-2xl font-extrabold text-gray-900 mb-2">Order Placed!</h2>
+      <p class="text-gray-500 mb-1">Thank you for shopping with ShopHub 🎉</p>
+      <p class="text-sm text-gray-400 mb-2">Order ID: <span id="order-id" class="font-bold text-gray-700"></span></p>
+      <p class="text-sm text-gray-400 mb-6">Expected Delivery: <span class="font-semibold text-gray-700" id="delivery-date"></span></p>
+      <div class="space-y-3">
+        <a href="home.html">
+          <button class="w-full bg-purple-600 text-white py-3 rounded-xl font-bold hover:bg-purple-700 transition-all">Continue Shopping</button>
+        </a>
+        <a href="track-order.html">
+          <button class="w-full border border-purple-300 text-purple-600 py-3 rounded-xl font-bold hover:bg-purple-50 transition-all mt-2">Track My Order</button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ─── Cart Data ─────────────────────────────────────────────────────────────
+    let cart = JSON.parse(localStorage.getItem('myShopCart')) || [];
+    let selectedPaymentMethod = 'upi';
+    let addressData = {};
+
+    // Group cart items by id
+    function groupCart(cart) {
+      const groups = {};
+      cart.forEach(item => {
+        const k = item.id || (item.name + (item.size || ''));
+        if (!groups[k]) groups[k] = { ...item, qty: 0 };
+        groups[k].qty++;
+      });
+      return Object.values(groups);
+    }
+
+    function calcTotals(groups) {
+      const subtotal = groups.reduce((s, g) => s + parseFloat(g.price) * g.qty, 0);
+      const delivery = subtotal > 499 ? 0 : 49;
+      const discount = Math.round(subtotal * 0.1);
+      const total = Math.max(0, subtotal + delivery - discount);
+      return { subtotal, delivery, discount, total };
+    }
+
+    // ─── Populate Sidebar ──────────────────────────────────────────────────────
+    function populateSidebar() {
+      const groups = groupCart(cart);
+      const { subtotal, total } = calcTotals(groups);
+      document.getElementById('sidebar-items').innerHTML = groups.map(g => `
+        <div class="flex items-center gap-3">
+          <img src="${g.image}" class="w-12 h-12 rounded-lg object-cover bg-gray-100 flex-shrink-0" onerror="this.src='https://via.placeholder.com/48'">
+          <div class="flex-1 min-w-0">
+            <p class="text-xs font-semibold text-gray-900 truncate">${g.name}</p>
+            ${g.size ? `<p class="text-xs text-gray-400">Size: ${g.size}</p>` : ''}
+            <p class="text-xs text-purple-600 font-bold">₹${g.price} × ${g.qty}</p>
+          </div>
+        </div>
+      `).join('');
+      document.getElementById('sb-subtotal').textContent = subtotal;
+      document.getElementById('sb-total').textContent = total;
+    }
+
+    populateSidebar();
+
+    // ─── Step Navigation ───────────────────────────────────────────────────────
+    function goToStep(n) {
+      if (n === 2) {
+        // Validate address
+        const required = ['fname','lname','phone','addr1','city','state','pin'];
+        const missing = required.some(id => !document.getElementById(id).value.trim());
+        if (missing) {
+          document.getElementById('addr-error').classList.remove('hidden');
+          return;
+        }
+        document.getElementById('addr-error').classList.add('hidden');
+        // Save address
+        addressData = {
+          name: document.getElementById('fname').value + ' ' + document.getElementById('lname').value,
+          phone: document.getElementById('phone').value,
+          addr1: document.getElementById('addr1').value,
+          addr2: document.getElementById('addr2').value,
+          city: document.getElementById('city').value,
+          state: document.getElementById('state').value,
+          pin: document.getElementById('pin').value,
+          type: document.querySelector('input[name="addrtype"]:checked').value
+        };
+      }
+      if (n === 3) {
+        populateReview();
+      }
+
+      // Update panels
+      [1, 2, 3].forEach(i => {
+        document.getElementById(`panel-${i}`).classList.toggle('hidden', i !== n);
+        const circle = document.getElementById(`step${i}-circle`);
+        const label = document.getElementById(`step${i}-label`);
+        circle.className = `w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ` +
+          (i < n ? 'step-done' : i === n ? 'step-active' : 'step-inactive');
+        label.className = `text-sm font-semibold ` + (i <= n ? 'text-purple-700' : 'text-gray-400');
+        if (i < n) circle.innerHTML = '<i class="fas fa-check text-xs"></i>';
+        else circle.textContent = i;
+      });
+    }
+
+    // ─── Payment Selection ─────────────────────────────────────────────────────
+    const paymentInputs = { upi: 'upi-input', card: 'card-input', netbanking: 'netbanking-input', cod: null };
+    window.selectPayment = function(el, method) {
+      document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+      selectedPaymentMethod = method;
+
+      // Hide all extra inputs
+      Object.keys(paymentInputs).forEach(m => {
+        const inp = document.getElementById(paymentInputs[m]);
+        if (inp) inp.classList.add('hidden');
+      });
+      // Show selected
+      const activeInput = document.getElementById(paymentInputs[method]);
+      if (activeInput) activeInput.classList.remove('hidden');
+
+      // Update radio visuals
+      ['upi','card','netbanking','cod'].forEach(m => {
+        const r = document.getElementById(`radio-${m}`);
+        if (m === method) {
+          r.className = 'w-5 h-5 rounded-full border-2 border-purple-600 flex items-center justify-center';
+          r.innerHTML = '<div class="w-2.5 h-2.5 rounded-full bg-purple-600"></div>';
+        } else {
+          r.className = 'w-5 h-5 rounded-full border-2 border-gray-300 flex items-center justify-center';
+          r.innerHTML = '';
+        }
+      });
+    };
+
+    // ─── Review Page ───────────────────────────────────────────────────────────
+    function populateReview() {
+      document.getElementById('review-name').textContent = addressData.name + ` (${addressData.type})`;
+      document.getElementById('review-addr').textContent = addressData.addr1 + (addressData.addr2 ? ', ' + addressData.addr2 : '');
+      document.getElementById('review-pinstate').textContent = addressData.city + ', ' + addressData.state + ' - ' + addressData.pin;
+      document.getElementById('review-phone').textContent = '📞 ' + addressData.phone;
+
+      const paymentLabels = { upi: 'UPI', card: 'Credit/Debit Card', netbanking: 'Net Banking', cod: 'Cash on Delivery' };
+      document.getElementById('review-payment').textContent = paymentLabels[selectedPaymentMethod];
+
+      const groups = groupCart(cart);
+      document.getElementById('review-items').innerHTML = groups.map(g => `
+        <div class="flex items-center gap-3 bg-gray-50 rounded-xl p-3">
+          <img src="${g.image}" class="w-14 h-14 rounded-lg object-cover" onerror="this.src='https://via.placeholder.com/56'">
+          <div class="flex-1">
+            <p class="text-sm font-semibold text-gray-900">${g.name}</p>
+            ${g.size ? `<p class="text-xs text-gray-500">Size: ${g.size}</p>` : ''}
+            <p class="text-xs text-gray-500">Qty: ${g.qty}</p>
+          </div>
+          <p class="text-sm font-bold text-purple-700">₹${(parseFloat(g.price) * g.qty).toFixed(0)}</p>
+        </div>
+      `).join('');
+
+      const { subtotal, delivery, discount, total } = calcTotals(groups);
+      document.getElementById('r-subtotal').textContent = subtotal;
+      document.getElementById('r-delivery').textContent = delivery === 0 ? 'FREE' : `₹${delivery}`;
+      document.getElementById('r-discount').textContent = discount;
+      document.getElementById('r-total').textContent = total;
+    }
+
+    // ─── Place Order ───────────────────────────────────────────────────────────
+    window.placeOrder = function() {
+      const orderId = 'SH' + Date.now().toString().slice(-8).toUpperCase();
+      const deliveryDate = new Date();
+      deliveryDate.setDate(deliveryDate.getDate() + 5);
+      const options = { weekday: 'short', month: 'short', day: 'numeric' };
+
+      // Save order to localStorage for order tracking
+      const groups = groupCart(cart);
+      const { total } = calcTotals(groups);
+      const order = {
+        id: orderId,
+        date: new Date().toISOString(),
+        items: groups,
+        address: addressData,
+        payment: selectedPaymentMethod,
+        total,
+        status: 'confirmed',
+        deliveryDate: deliveryDate.toISOString()
+      };
+      const orders = JSON.parse(localStorage.getItem('shopHubOrders') || '[]');
+      orders.unshift(order);
+      localStorage.setItem('shopHubOrders', JSON.stringify(orders));
+
+      // Clear cart
+      localStorage.removeItem('myShopCart');
+
+      document.getElementById('order-id').textContent = orderId;
+      document.getElementById('delivery-date').textContent = deliveryDate.toLocaleDateString('en-IN', options);
+
+      const overlay = document.getElementById('success-overlay');
+      overlay.classList.add('show');
+    };
+  </script>
+</body>
+</html>

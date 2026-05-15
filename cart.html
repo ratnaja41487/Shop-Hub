@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart | ShopHub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; background-color: #f9fafb; }
+    .qty-btn { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; transition: background 0.15s; }
+    .qty-btn:hover { background: #ede9fe; color: #7c3aed; }
+  </style>
+</head>
+<body class="p-4 md:p-12">
+
+  <!-- Header -->
+  <div class="max-w-5xl mx-auto mb-4">
+    <a href="home.html" class="text-2xl font-bold text-purple-700 flex items-center gap-2">
+      <i class="fas fa-shopping-bag"></i> ShopHub
+    </a>
+  </div>
+
+  <div class="max-w-5xl mx-auto flex flex-col lg:flex-row gap-8">
+
+    <!-- Left: Cart Items -->
+    <div class="flex-1 bg-white shadow-lg rounded-2xl p-6 md:p-8">
+      <div class="flex justify-between items-center border-b pb-5 mb-6">
+        <h1 class="text-2xl font-bold text-gray-900">Shopping Cart <span id="item-count-label" class="text-base font-normal text-gray-400"></span></h1>
+        <a href="home.html" class="text-sm font-semibold text-gray-400 hover:text-purple-600 transition-colors">
+          <i class="fas fa-arrow-left mr-1"></i> Continue Shopping
+        </a>
+      </div>
+
+      <!-- Cart Items -->
+      <div id="cart-display"></div>
+
+      <!-- Empty State -->
+      <div id="empty-state" class="hidden text-center py-16">
+        <i class="fas fa-shopping-cart text-gray-200 text-6xl mb-4"></i>
+        <p class="text-gray-500 text-lg font-semibold">Your cart is empty</p>
+        <a href="home.html" class="inline-block mt-4 bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition-all text-sm font-bold">Start Shopping</a>
+      </div>
+    </div>
+
+    <!-- Right: Order Summary -->
+    <div id="summary-panel" class="hidden lg:w-80">
+      <div class="bg-white shadow-lg rounded-2xl p-6 sticky top-6">
+        <h2 class="text-lg font-bold text-gray-900 mb-5 border-b pb-3">Order Summary</h2>
+
+        <div class="space-y-3 text-sm text-gray-600 mb-5">
+          <div class="flex justify-between">
+            <span>Subtotal (<span id="summary-count">0</span> items)</span>
+            <span>₹<span id="subtotal">0</span></span>
+          </div>
+          <div class="flex justify-between">
+            <span>Delivery</span>
+            <span id="delivery-cost" class="text-green-600 font-semibold">FREE</span>
+          </div>
+          <div class="flex justify-between">
+            <span>Discount (10%)</span>
+            <span class="text-green-600">-₹<span id="discount">0</span></span>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center text-base font-bold border-t pt-4 mb-6">
+          <span>Total</span>
+          <span class="text-purple-700 text-xl">₹<span id="total-price">0</span></span>
+        </div>
+
+        <!-- Coupon -->
+        <div class="mb-5">
+          <div class="flex gap-2">
+            <input type="text" id="coupon-input" placeholder="Enter coupon code" class="flex-1 border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-purple-400 transition-colors">
+            <button onclick="applyCoupon()" class="bg-purple-100 text-purple-700 px-3 py-2 rounded-lg text-sm font-bold hover:bg-purple-200 transition-colors">Apply</button>
+          </div>
+          <p id="coupon-msg" class="text-xs mt-1"></p>
+        </div>
+
+        <a href="checkout.html">
+          <button class="w-full bg-purple-600 text-white py-4 rounded-xl font-bold hover:bg-purple-700 transition-all shadow-md flex items-center justify-center gap-2">
+            <i class="fas fa-lock text-sm"></i> Proceed to Checkout
+          </button>
+        </a>
+
+        <p class="text-xs text-gray-400 text-center mt-3 flex items-center justify-center gap-1">
+          <i class="fas fa-shield-alt"></i> Secure & Encrypted Payment
+        </p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // ─── Helpers ─────────────────────────────────────────────────────────────
+    function getCart() {
+      return JSON.parse(localStorage.getItem('myShopCart')) || [];
+    }
+    function saveCart(cart) {
+      localStorage.setItem('myShopCart', JSON.stringify(cart));
+    }
+
+    // ─── Render ───────────────────────────────────────────────────────────────
+    function renderCart() {
+      const cart = getCart();
+      const display = document.getElementById('cart-display');
+      const emptyState = document.getElementById('empty-state');
+      const summaryPanel = document.getElementById('summary-panel');
+
+      if (cart.length === 0) {
+        display.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        summaryPanel.classList.add('hidden');
+        document.getElementById('item-count-label').textContent = '';
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      summaryPanel.classList.remove('hidden');
+      document.getElementById('item-count-label').textContent = `(${cart.length} item${cart.length > 1 ? 's' : ''})`;
+
+      // Group by id to handle quantities
+      const groups = {};
+      cart.forEach((item, idx) => {
+        const key = item.id || (item.name + item.size);
+        if (!groups[key]) groups[key] = { ...item, qty: 0, indices: [] };
+        groups[key].qty++;
+        groups[key].indices.push(idx);
+      });
+
+      display.innerHTML = Object.values(groups).map((group, gi) => `
+        <div class="flex items-start gap-4 py-5 border-b last:border-0" data-key="${group.id || (group.name + group.size)}">
+          <img src="${group.image}" class="w-20 h-20 object-cover rounded-xl bg-gray-100 flex-shrink-0" onerror="this.src='https://via.placeholder.com/80'">
+          <div class="flex-1 min-w-0">
+            <h3 class="font-bold text-gray-900 text-sm leading-tight">${group.name}</h3>
+            ${group.size ? `<span class="inline-block mt-1 text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded font-medium">Size: ${group.size}</span>` : ''}
+            <p class="text-purple-600 font-bold mt-1">₹${group.price}</p>
+          </div>
+          <div class="flex flex-col items-end gap-2 flex-shrink-0">
+            <!-- Qty Controls -->
+            <div class="flex items-center border border-gray-200 rounded-lg overflow-hidden">
+              <button class="qty-btn text-gray-500 hover:bg-gray-100" onclick="changeQty('${group.id || (group.name + group.size)}', -1)">−</button>
+              <span class="w-8 text-center text-sm font-bold text-gray-800">${group.qty}</span>
+              <button class="qty-btn text-gray-500 hover:bg-gray-100" onclick="changeQty('${group.id || (group.name + group.size)}', 1)">+</button>
+            </div>
+            <!-- Item total -->
+            <p class="text-xs text-gray-400">₹${(parseFloat(group.price) * group.qty).toFixed(0)} total</p>
+            <!-- Remove -->
+            <button onclick="removeGroup('${group.id || (group.name + group.size)}')" class="text-red-400 hover:text-red-600 text-xs flex items-center gap-1 transition-colors">
+              <i class="fas fa-trash text-xs"></i> Remove
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      updateSummary(groups);
+    }
+
+    // ─── Summary ──────────────────────────────────────────────────────────────
+    let extraDiscount = 0;
+    function updateSummary(groups) {
+      const groupsArr = groups ? Object.values(groups) : [];
+      if (!groupsArr.length) return;
+
+      let subtotal = 0;
+      let totalItems = 0;
+      groupsArr.forEach(g => {
+        subtotal += parseFloat(g.price) * g.qty;
+        totalItems += g.qty;
+      });
+
+      const delivery = subtotal > 499 ? 0 : 49;
+      const discount = Math.round(subtotal * 0.10) + extraDiscount;
+      const total = Math.max(0, subtotal + delivery - discount);
+
+      document.getElementById('summary-count').textContent = totalItems;
+      document.getElementById('subtotal').textContent = subtotal;
+      document.getElementById('delivery-cost').textContent = delivery === 0 ? 'FREE' : `₹${delivery}`;
+      document.getElementById('discount').textContent = discount;
+      document.getElementById('total-price').textContent = total;
+    }
+
+    // ─── Quantity Change ──────────────────────────────────────────────────────
+    window.changeQty = function(key, delta) {
+      let cart = getCart();
+      // Find indices of this key
+      const indices = cart.reduce((acc, item, i) => {
+        if ((item.id || (item.name + item.size)) === key) acc.push(i);
+        return acc;
+      }, []);
+
+      if (delta === -1 && indices.length > 0) {
+        cart.splice(indices[0], 1); // remove one occurrence
+      } else if (delta === 1 && indices.length > 0) {
+        cart.push({ ...cart[indices[0]] }); // add a copy
+      }
+      saveCart(cart);
+      renderCart();
+    };
+
+    // ─── Remove Group ─────────────────────────────────────────────────────────
+    window.removeGroup = function(key) {
+      let cart = getCart().filter(item => (item.id || (item.name + item.size)) !== key);
+      saveCart(cart);
+      renderCart();
+    };
+
+    // ─── Coupon ───────────────────────────────────────────────────────────────
+    const COUPONS = { SAVE50: 50, SHOPHUB20: 20, WELCOME100: 100 };
+    let appliedCoupon = null;
+    window.applyCoupon = function() {
+      const code = document.getElementById('coupon-input').value.trim().toUpperCase();
+      const msg = document.getElementById('coupon-msg');
+      if (COUPONS[code]) {
+        extraDiscount = COUPONS[code];
+        appliedCoupon = code;
+        msg.textContent = `✓ Coupon applied! Extra ₹${COUPONS[code]} off.`;
+        msg.className = 'text-xs mt-1 text-green-600 font-semibold';
+        const cart = getCart();
+        const groups = {};
+        cart.forEach(item => {
+          const k = item.id || (item.name + item.size);
+          if (!groups[k]) groups[k] = { ...item, qty: 0 };
+          groups[k].qty++;
+        });
+        updateSummary(groups);
+      } else {
+        msg.textContent = 'Invalid coupon code.';
+        msg.className = 'text-xs mt-1 text-red-500';
+      }
+    };
+
+    // ─── Init ─────────────────────────────────────────────────────────────────
+    renderCart();
+  </script>
+</body>
+</html>
