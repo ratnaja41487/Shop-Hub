@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become a Vendor - ShopHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f9fafb; }
+        .vendor-hero { background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%); }
+    </style>
+</head>
+<body>
+
+    <!-- Simple Navigation -->
+    <nav class="bg-white border-b py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="home.html" class="text-2xl font-bold text-purple-700 flex items-center gap-2">
+                <i class="fas fa-shopping-bag"></i> ShopHub
+            </a>
+            <a href="home.html" class="text-gray-600 hover:text-purple-600 font-medium">Back to Shop</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="vendor-hero py-20 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Sell with ShopHub</h1>
+            <p class="text-lg text-purple-100 max-w-2xl mx-auto">Join thousands of businesses and start selling to millions of customers worldwide. Our platform provides the tools you need to grow.</p>
+        </div>
+    </section>
+
+    <!-- Benefits & Registration Grid -->
+    <main class="container mx-auto px-4 -mt-10 pb-20">
+        <div class="grid lg:grid-cols-3 gap-8">
+            
+            <!-- Sidebar: Why Join? -->
+            <div class="lg:col-span-1 space-y-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">Why partner with us?</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-purple-100 p-3 rounded-lg text-purple-600">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Growth Tools</h4>
+                                <p class="text-sm text-gray-500">Access advanced analytics to track your sales performance.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="bg-purple-100 p-3 rounded-lg text-purple-600">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">Secure Payments</h4>
+                                <p class="text-sm text-gray-500">Receive automated weekly payouts directly to your bank.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="bg-purple-100 p-3 rounded-lg text-purple-600">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800">24/7 Support</h4>
+                                <p class="text-sm text-gray-500">Dedicated account managers to help you succeed.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main: Registration Form -->
+            <div class="lg:col-span-2">
+                <div class="bg-white p-8 md:p-10 rounded-2xl shadow-lg border border-gray-100">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-8">Store Registration</h2>
+                    
+                    <form action="#" class="space-y-6">
+                        <!-- Step 1: Personal Info -->
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">First Name</label>
+                                <input type="text" placeholder="John" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-purple-500 outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Last Name</label>
+                                <input type="text" placeholder="Doe" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-purple-500 outline-none transition">
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Store Details -->
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Store Name</label>
+                                <input type="text" placeholder="Example: Doe's Vintage Shop" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-purple-500 outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Business Email</label>
+                                <input type="email" placeholder="contact@yourstore.com" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-purple-500 outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
+                                <input type="tel" placeholder="+1 (555) 000-0000" class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-purple-500 outline-none transition">
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Product Category -->
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Primary Category</label>
+                            <select class="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-purple-500 outline-none transition appearance-none bg-white">
+                                <option>Fashion & Apparel</option>
+                                <option>Electronics</option>
+                                <option>Home & Living</option>
+                                <option>Beauty & Health</option>
+                                <option>Handmade Crafts</option>
+                            </select>
+                        </div>
+
+                        <!-- Step 4: Verification Upload -->
+                        <div class="border-2 border-dashed border-gray-200 p-6 rounded-xl text-center">
+                            <i class="fas fa-cloud-upload-alt text-3xl text-gray-400 mb-3"></i>
+                            <p class="text-sm text-gray-500">Upload Business License or ID (PDF, JPG)</p>
+                            <input type="file" class="hidden" id="file-upload">
+                            <label for="file-upload" class="mt-3 inline-block cursor-pointer text-purple-600 font-bold hover:text-purple-700">Browse Files</label>
+                        </div>
+
+                        <div class="flex items-center gap-3">
+                            <input type="checkbox" id="terms" class="w-4 h-4 text-purple-600 rounded">
+                            <label for="terms" class="text-sm text-gray-600">I agree to ShopHub's <a href="#" class="text-purple-600 underline">Vendor Terms & Conditions</a></label>
+                        </div>
+
+                        <button type="submit" class="w-full bg-purple-600 text-white py-4 rounded-xl font-bold text-lg hover:bg-purple-700 shadow-lg shadow-purple-200 transition-all">
+                            Submit Application
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t py-8">
+        <div class="container mx-auto px-4 text-center text-gray-500 text-sm">
+            &copy; 2026 ShopHub Marketplace. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
