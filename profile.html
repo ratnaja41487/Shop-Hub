@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile | ShopHub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; background: #f9fafb; }
+    .input-field { width:100%; border:1px solid #e5e7eb; border-radius:10px; padding:11px 16px; font-size:14px; outline:none; transition:border-color 0.2s; background:white; }
+    .input-field:focus { border-color:#7c3aed; box-shadow:0 0 0 3px rgba(124,58,237,0.08); }
+    .input-field:disabled { background:#f9fafb; color:#6b7280; }
+    .nav-link { display:flex; align-items:center; gap:10px; padding:10px 14px; border-radius:10px; font-size:14px; font-weight:600; color:#6b7280; transition:all 0.15s; cursor:pointer; }
+    .nav-link:hover { background:#f3f4f6; color:#7c3aed; }
+    .nav-link.active { background:#ede9fe; color:#7c3aed; }
+    .avatar-ring { background: linear-gradient(135deg, #7c3aed, #ec4899); }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="bg-white border-b sticky top-0 z-50 shadow-sm">
+  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="home.html" class="text-xl font-bold text-purple-700 flex items-center gap-2">
+      <i class="fas fa-shopping-bag"></i> ShopHub
+    </a>
+    <nav class="flex items-center gap-5 text-sm text-gray-600">
+      <a href="order-history.html" class="hover:text-purple-600"><i class="fas fa-box mr-1"></i>Orders</a>
+      <a href="wishlist.html" class="hover:text-purple-600"><i class="fas fa-heart mr-1"></i>Wishlist</a>
+      <a href="cart.html" class="relative hover:text-purple-600">
+        <i class="fas fa-shopping-cart text-xl"></i>
+        <span id="cart-badge" class="absolute -top-2 -right-2 bg-purple-600 text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center">0</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<div class="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row gap-6">
+
+  <!-- Sidebar -->
+  <aside class="md:w-64 flex-shrink-0">
+    <!-- Avatar Card -->
+    <div class="bg-white rounded-2xl shadow-sm p-5 mb-4 text-center">
+      <div class="relative inline-block mb-3">
+        <div class="avatar-ring w-20 h-20 rounded-full p-0.5 mx-auto">
+          <div class="w-full h-full bg-white rounded-full flex items-center justify-center">
+            <span id="avatar-initial" class="text-3xl font-extrabold text-purple-600">?</span>
+          </div>
+        </div>
+        <button onclick="document.getElementById('avatar-upload').click()"
+          class="absolute bottom-0 right-0 w-7 h-7 bg-purple-600 text-white rounded-full flex items-center justify-center shadow hover:bg-purple-700 transition-colors">
+          <i class="fas fa-camera text-xs"></i>
+        </button>
+        <input type="file" id="avatar-upload" accept="image/*" class="hidden" onchange="uploadAvatar(event)">
+      </div>
+      <h2 id="sidebar-name" class="font-bold text-gray-900 text-base">Guest User</h2>
+      <p id="sidebar-email" class="text-xs text-gray-500 mt-0.5 truncate">Not logged in</p>
+      <span class="inline-block mt-2 text-xs bg-purple-100 text-purple-600 px-2 py-0.5 rounded-full font-semibold">
+        ShopHub Member
+      </span>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="bg-white rounded-2xl shadow-sm p-4 mb-4">
+      <div class="grid grid-cols-3 gap-2 text-center">
+        <a href="order-history.html" class="block">
+          <p id="stat-orders" class="text-xl font-extrabold text-purple-600">0</p>
+          <p class="text-xs text-gray-500 mt-0.5">Orders</p>
+        </a>
+        <a href="wishlist.html" class="block">
+          <p id="stat-wishlist" class="text-xl font-extrabold text-pink-500">0</p>
+          <p class="text-xs text-gray-500 mt-0.5">Wishlist</p>
+        </a>
+        <div>
+          <p id="stat-savings" class="text-xl font-extrabold text-green-500">₹0</p>
+          <p class="text-xs text-gray-500 mt-0.5">Saved</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nav Links -->
+    <div class="bg-white rounded-2xl shadow-sm p-3 space-y-1">
+      <div class="nav-link active" onclick="switchTab('personal', this)">
+        <i class="fas fa-user w-4 text-center"></i> Personal Info
+      </div>
+      <div class="nav-link" onclick="switchTab('address', this)">
+        <i class="fas fa-map-marker-alt w-4 text-center"></i> Saved Addresses
+      </div>
+      <div class="nav-link" onclick="switchTab('security', this)">
+        <i class="fas fa-lock w-4 text-center"></i> Security
+      </div>
+      <div class="nav-link" onclick="switchTab('preferences', this)">
+        <i class="fas fa-bell w-4 text-center"></i> Preferences
+      </div>
+      <hr class="my-1">
+      <a href="order-history.html" class="nav-link"><i class="fas fa-box w-4 text-center"></i> My Orders</a>
+      <a href="wishlist.html" class="nav-link"><i class="fas fa-heart w-4 text-center"></i> Wishlist</a>
+      <hr class="my-1">
+      <div class="nav-link text-red-500 hover:bg-red-50 hover:text-red-600" onclick="logout()">
+        <i class="fas fa-sign-out-alt w-4 text-center"></i> Logout
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1">
+
+    <!-- Personal Info Tab -->
+    <div id="tab-personal" class="bg-white rounded-2xl shadow-sm p-6 md:p-8">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-bold text-gray-900">Personal Information</h2>
+        <button id="edit-btn" onclick="toggleEdit()" class="text-sm font-bold text-purple-600 border border-purple-200 px-4 py-2 rounded-lg hover:bg-purple-50 transition-colors">
+          <i class="fas fa-pen mr-1"></i> Edit
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+          <input type="text" id="p-fname" class="input-field" disabled>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+          <input type="text" id="p-lname" class="input-field" disabled>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+          <input type="email" id="p-email" class="input-field" disabled>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+          <input type="tel" id="p-phone" class="input-field" placeholder="+91 9876543210" disabled>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
+          <input type="date" id="p-dob" class="input-field" disabled>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+          <select id="p-gender" class="input-field" disabled>
+            <option value="">Select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other / Prefer not to say</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Save / Cancel (hidden by default) -->
+      <div id="save-btns" class="hidden mt-6 flex gap-3">
+        <button onclick="saveProfile()" class="bg-purple-600 text-white px-6 py-2.5 rounded-xl font-bold hover:bg-purple-700 transition-all text-sm">
+          <i class="fas fa-check mr-1"></i> Save Changes
+        </button>
+        <button onclick="cancelEdit()" class="border border-gray-300 text-gray-700 px-6 py-2.5 rounded-xl font-bold hover:bg-gray-50 transition-all text-sm">
+          Cancel
+        </button>
+      </div>
+
+      <div id="save-success" class="hidden mt-4 bg-green-50 text-green-700 text-sm px-4 py-3 rounded-xl flex items-center gap-2">
+        <i class="fas fa-check-circle"></i> Profile updated successfully!
+      </div>
+    </div>
+
+    <!-- Address Tab -->
+    <div id="tab-address" class="hidden bg-white rounded-2xl shadow-sm p-6 md:p-8">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-bold text-gray-900">Saved Addresses</h2>
+        <button onclick="showAddressForm()" class="text-sm font-bold text-white bg-purple-600 px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+          <i class="fas fa-plus mr-1"></i> Add New
+        </button>
+      </div>
+      <div id="address-list" class="space-y-4"></div>
+
+      <!-- Add Address Form (hidden) -->
+      <div id="address-form" class="hidden mt-6 border-t pt-6">
+        <h3 class="font-bold text-gray-800 mb-4">New Address</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="text" id="a-name" class="input-field" placeholder="Full Name *">
+          <input type="tel" id="a-phone" class="input-field" placeholder="Phone *">
+          <input type="text" id="a-line1" class="input-field md:col-span-2" placeholder="Address Line 1 *">
+          <input type="text" id="a-line2" class="input-field md:col-span-2" placeholder="Landmark (optional)">
+          <input type="text" id="a-city" class="input-field" placeholder="City *">
+          <select id="a-state" class="input-field bg-white">
+            <option value="">Select State *</option>
+            <option>Telangana</option><option>Andhra Pradesh</option><option>Karnataka</option>
+            <option>Tamil Nadu</option><option>Maharashtra</option><option>Delhi</option>
+            <option>Gujarat</option><option>Rajasthan</option><option>Other</option>
+          </select>
+          <input type="text" id="a-pin" class="input-field" placeholder="PIN Code *" maxlength="6">
+          <select id="a-type" class="input-field bg-white">
+            <option value="Home">Home</option>
+            <option value="Work">Work</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="flex gap-3 mt-4">
+          <button onclick="saveAddress()" class="bg-purple-600 text-white px-5 py-2.5 rounded-xl font-bold hover:bg-purple-700 text-sm">Save Address</button>
+          <button onclick="document.getElementById('address-form').classList.add('hidden')" class="border border-gray-300 text-gray-700 px-5 py-2.5 rounded-xl font-bold hover:bg-gray-50 text-sm">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Security Tab -->
+    <div id="tab-security" class="hidden bg-white rounded-2xl shadow-sm p-6 md:p-8">
+      <h2 class="text-xl font-bold text-gray-900 mb-6">Security Settings</h2>
+      <div class="max-w-md space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
+          <input type="password" id="s-current" class="input-field" placeholder="••••••••">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+          <input type="password" id="s-new" class="input-field" placeholder="Min 8 characters">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
+          <input type="password" id="s-confirm" class="input-field" placeholder="Re-enter new password">
+        </div>
+        <p id="pwd-error" class="text-red-500 text-xs hidden"></p>
+        <button onclick="changePassword()" class="bg-purple-600 text-white px-6 py-2.5 rounded-xl font-bold hover:bg-purple-700 text-sm">
+          Update Password
+        </button>
+      </div>
+    </div>
+
+    <!-- Preferences Tab -->
+    <div id="tab-preferences" class="hidden bg-white rounded-2xl shadow-sm p-6 md:p-8">
+      <h2 class="text-xl font-bold text-gray-900 mb-6">Notification Preferences</h2>
+      <div class="space-y-4">
+        ${[
+          ['Order Updates','Get notified when your order status changes','pref-orders'],
+          ['Offers & Deals','Receive exclusive coupons and sale alerts','pref-offers'],
+          ['New Arrivals','Be the first to know about new products','pref-arrivals'],
+          ['Wishlist Reminders','Alerts when wishlist items go on sale','pref-wishlist'],
+        ].map(([title, desc, id]) => `
+          <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
+            <div>
+              <p class="font-semibold text-gray-900 text-sm">${title}</p>
+              <p class="text-xs text-gray-500 mt-0.5">${desc}</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer ml-4">
+              <input type="checkbox" id="${id}" class="sr-only peer" checked onchange="savePreferences()">
+              <div class="w-10 h-6 bg-gray-200 peer-focus:ring-2 peer-focus:ring-purple-300 rounded-full peer peer-checked:bg-purple-600 transition-colors"></div>
+              <div class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform peer-checked:translate-x-4"></div>
+            </label>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  let isEditing = false;
+  let profileData = {};
+
+  // ─── Load Profile ──────────────────────────────────────────────────────────
+  function loadProfile() {
+    profileData = JSON.parse(localStorage.getItem('shopHubProfile') || '{}');
+    const name = localStorage.getItem('userName') || '';
+    const email = Object.keys(JSON.parse(localStorage.getItem('shopHubProfile') || '{}')).join('') || '';
+
+    // Fill sidebar
+    document.getElementById('sidebar-name').textContent = profileData.fname
+      ? `${profileData.fname} ${profileData.lname || ''}`.trim()
+      : (name || 'Guest User');
+    document.getElementById('sidebar-email').textContent = profileData.email || 'No email set';
+    const initial = (profileData.fname || name || 'G')[0].toUpperCase();
+    document.getElementById('avatar-initial').textContent = initial;
+
+    // Fill form
+    document.getElementById('p-fname').value = profileData.fname || name.split(' ')[0] || '';
+    document.getElementById('p-lname').value = profileData.lname || name.split(' ').slice(1).join(' ') || '';
+    document.getElementById('p-email').value = profileData.email || '';
+    document.getElementById('p-phone').value = profileData.phone || '';
+    document.getElementById('p-dob').value = profileData.dob || '';
+    document.getElementById('p-gender').value = profileData.gender || '';
+
+    // Stats
+    const orders = JSON.parse(localStorage.getItem('shopHubOrders') || '[]');
+    const wishlist = JSON.parse(localStorage.getItem('shopHubWishlist') || '[]');
+    const savings = orders.reduce((s, o) => s + (o.total ? Math.round(o.total * 0.1) : 0), 0);
+    document.getElementById('stat-orders').textContent = orders.length;
+    document.getElementById('stat-wishlist').textContent = wishlist.length;
+    document.getElementById('stat-savings').textContent = '₹' + savings;
+
+    // Avatar image
+    const avatarImg = localStorage.getItem('shopHubAvatar');
+    if (avatarImg) {
+      document.getElementById('avatar-initial').parentElement.innerHTML =
+        `<img src="${avatarImg}" class="w-full h-full rounded-full object-cover">`;
+    }
+
+    renderAddresses();
+  }
+
+  // ─── Edit / Save ───────────────────────────────────────────────────────────
+  window.toggleEdit = function() {
+    isEditing = !isEditing;
+    ['p-fname','p-lname','p-email','p-phone','p-dob','p-gender'].forEach(id => {
+      document.getElementById(id).disabled = !isEditing;
+    });
+    document.getElementById('edit-btn').innerHTML = isEditing
+      ? '<i class="fas fa-times mr-1"></i> Cancel'
+      : '<i class="fas fa-pen mr-1"></i> Edit';
+    document.getElementById('save-btns').classList.toggle('hidden', !isEditing);
+    document.getElementById('save-success').classList.add('hidden');
+    if (!isEditing) loadProfile(); // revert
+  };
+
+  window.cancelEdit = function() { toggleEdit(); };
+
+  window.saveProfile = function() {
+    profileData = {
+      fname: document.getElementById('p-fname').value,
+      lname: document.getElementById('p-lname').value,
+      email: document.getElementById('p-email').value,
+      phone: document.getElementById('p-phone').value,
+      dob: document.getElementById('p-dob').value,
+      gender: document.getElementById('p-gender').value,
+    };
+    localStorage.setItem('shopHubProfile', JSON.stringify(profileData));
+    localStorage.setItem('userName', `${profileData.fname} ${profileData.lname}`.trim());
+
+    toggleEdit();
+    isEditing = false;
+    ['p-fname','p-lname','p-email','p-phone','p-dob','p-gender'].forEach(id => {
+      document.getElementById(id).disabled = true;
+    });
+    document.getElementById('edit-btn').innerHTML = '<i class="fas fa-pen mr-1"></i> Edit';
+    document.getElementById('save-btns').classList.add('hidden');
+    document.getElementById('save-success').classList.remove('hidden');
+    setTimeout(() => document.getElementById('save-success').classList.add('hidden'), 3000);
+
+    // Update sidebar
+    document.getElementById('sidebar-name').textContent = `${profileData.fname} ${profileData.lname}`.trim();
+    document.getElementById('sidebar-email').textContent = profileData.email;
+    document.getElementById('avatar-initial').textContent = (profileData.fname || 'G')[0].toUpperCase();
+  };
+
+  // ─── Avatar Upload ─────────────────────────────────────────────────────────
+  window.uploadAvatar = function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      localStorage.setItem('shopHubAvatar', ev.target.result);
+      const wrap = document.getElementById('avatar-initial')?.parentElement;
+      if (wrap) wrap.innerHTML = `<img src="${ev.target.result}" class="w-full h-full rounded-full object-cover">`;
+    };
+    reader.readAsDataURL(file);
+  };
+
+  // ─── Addresses ─────────────────────────────────────────────────────────────
+  function renderAddresses() {
+    const addresses = JSON.parse(localStorage.getItem('shopHubAddresses') || '[]');
+    const list = document.getElementById('address-list');
+    if (addresses.length === 0) {
+      list.innerHTML = `<div class="text-center py-10 text-gray-400">
+        <i class="fas fa-map-marker-alt text-4xl mb-3"></i>
+        <p class="text-sm">No saved addresses yet</p>
+      </div>`;
+      return;
+    }
+    list.innerHTML = addresses.map((addr, i) => `
+      <div class="border border-gray-200 rounded-xl p-4 flex justify-between items-start gap-3">
+        <div class="flex gap-3">
+          <div class="w-9 h-9 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+            <i class="fas fa-${addr.type === 'Work' ? 'briefcase' : addr.type === 'Other' ? 'location-arrow' : 'home'} text-purple-600 text-sm"></i>
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-0.5">
+              <p class="font-bold text-gray-900 text-sm">${addr.name}</p>
+              <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded font-semibold">${addr.type}</span>
+            </div>
+            <p class="text-sm text-gray-600">${addr.line1}${addr.line2 ? ', '+addr.line2 : ''}</p>
+            <p class="text-sm text-gray-600">${addr.city}, ${addr.state} - ${addr.pin}</p>
+            <p class="text-sm text-gray-500 mt-0.5">${addr.phone}</p>
+          </div>
+        </div>
+        <button onclick="deleteAddress(${i})" class="text-red-400 hover:text-red-600 text-sm transition-colors flex-shrink-0">
+          <i class="fas fa-trash"></i>
+        </button>
+      </div>
+    `).join('');
+  }
+
+  window.showAddressForm = function() {
+    document.getElementById('address-form').classList.remove('hidden');
+    document.getElementById('address-form').scrollIntoView({ behavior: 'smooth' });
+  };
+
+  window.saveAddress = function() {
+    const addr = {
+      name: document.getElementById('a-name').value.trim(),
+      phone: document.getElementById('a-phone').value.trim(),
+      line1: document.getElementById('a-line1').value.trim(),
+      line2: document.getElementById('a-line2').value.trim(),
+      city: document.getElementById('a-city').value.trim(),
+      state: document.getElementById('a-state').value,
+      pin: document.getElementById('a-pin').value.trim(),
+      type: document.getElementById('a-type').value,
+    };
+    if (!addr.name || !addr.line1 || !addr.city || !addr.state || !addr.pin) {
+      alert('Please fill all required fields.'); return;
+    }
+    const addresses = JSON.parse(localStorage.getItem('shopHubAddresses') || '[]');
+    addresses.push(addr);
+    localStorage.setItem('shopHubAddresses', JSON.stringify(addresses));
+    document.getElementById('address-form').classList.add('hidden');
+    renderAddresses();
+  };
+
+  window.deleteAddress = function(i) {
+    if (!confirm('Delete this address?')) return;
+    const addresses = JSON.parse(localStorage.getItem('shopHubAddresses') || '[]');
+    addresses.splice(i, 1);
+    localStorage.setItem('shopHubAddresses', JSON.stringify(addresses));
+    renderAddresses();
+  };
+
+  // ─── Security ──────────────────────────────────────────────────────────────
+  window.changePassword = function() {
+    const curr = document.getElementById('s-current').value;
+    const newPwd = document.getElementById('s-new').value;
+    const confirm = document.getElementById('s-confirm').value;
+    const err = document.getElementById('pwd-error');
+    if (!curr || !newPwd || !confirm) { err.textContent = 'All fields are required.'; err.classList.remove('hidden'); return; }
+    if (newPwd.length < 8) { err.textContent = 'New password must be at least 8 characters.'; err.classList.remove('hidden'); return; }
+    if (newPwd !== confirm) { err.textContent = 'Passwords do not match.'; err.classList.remove('hidden'); return; }
+    err.classList.add('hidden');
+    ['s-current','s-new','s-confirm'].forEach(id => document.getElementById(id).value = '');
+    alert('Password updated successfully!');
+  };
+
+  // ─── Preferences ──────────────────────────────────────────────────────────
+  window.savePreferences = function() {
+    const prefs = {
+      orders: document.getElementById('pref-orders')?.checked,
+      offers: document.getElementById('pref-offers')?.checked,
+      arrivals: document.getElementById('pref-arrivals')?.checked,
+      wishlist: document.getElementById('pref-wishlist')?.checked,
+    };
+    localStorage.setItem('shopHubPrefs', JSON.stringify(prefs));
+  };
+
+  // ─── Tabs ──────────────────────────────────────────────────────────────────
+  window.switchTab = function(tab, el) {
+    ['personal','address','security','preferences'].forEach(t => {
+      document.getElementById(`tab-${t}`)?.classList.add('hidden');
+    });
+    document.getElementById(`tab-${tab}`)?.classList.remove('hidden');
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    el.classList.add('active');
+  };
+
+  // ─── Logout ────────────────────────────────────────────────────────────────
+  window.logout = function() {
+    if (!confirm('Are you sure you want to logout?')) return;
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userName');
+    window.location.href = 'login.html';
+  };
+
+  // ─── Cart Badge ────────────────────────────────────────────────────────────
+  function updateCartBadge() {
+    const cart = JSON.parse(localStorage.getItem('myShopCart') || '[]');
+    document.getElementById('cart-badge').textContent = cart.length;
+  }
+
+  // ─── Init ──────────────────────────────────────────────────────────────────
+  loadProfile();
+  updateCartBadge();
+</script>
+</body>
+</html>
