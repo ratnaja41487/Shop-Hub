@@ -166,6 +166,7 @@
             transform: translateY(100%);
             transition: transform 0.4s ease, opacity 0.3s ease;
             opacity: 0;
+            z-index: 2; /* Ensures overlay sits safely on top of image links */
         }
 
         .product-card:hover .hover-overlay {
@@ -195,14 +196,23 @@
             width: 85%;
         }
 
+        /* Product Link Styling */
+        .product-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .product-link:hover .product-name {
+            text-decoration: underline;
+        }
+
         @media (max-width: 1024px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 600px) { .product-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-
-    
     <nav class="navbar">
         <a href="Men.html" class="logo">Back</a>
         <div class="nav-icons">
@@ -222,10 +232,11 @@
     </header>
 
     <main class="product-grid" id="product-grid">
-        <!-- Card 1 -->
         <div class="product-card" data-id="1">
             <div class="product-image-container">
-                <img src="Assets/jacket1.jpg" alt="Classic White Shirt" class="product-image">
+                <a href="product_detail.html">
+                    <img src="Assets/jacket1.jpg" alt="Classic White Shirt" class="product-image">
+                </a>
                 <div class="hover-overlay">
                     <div class="size-selection">
                         <div class="size-box">S</div><div class="size-box">M</div>
@@ -234,14 +245,17 @@
                     <button class="add-cart-btn">ADD TO CART</button>
                 </div>
             </div>
-            <p class="product-name">Classic Light Wash Denim Jacket</p>
+            <a href="product_detail.html" class="product-link">
+                <p class="product-name">Classic Light Wash Denim Jacket</p>
+            </a>
             <p class="product-price" data-price="999">₹999</p>
         </div>
 
-        <!-- Card 2 -->
         <div class="product-card" data-id="2">
             <div class="product-image-container">
-                <img src="Assets/jacket10.webp" alt="Light Blue Shirt" class="product-image">
+                <a href="product_detail.html">
+                    <img src="Assets/jacket10.webp" alt="Light Blue Shirt" class="product-image">
+                </a>
                 <div class="hover-overlay">
                     <div class="size-selection">
                         <div class="size-box">S</div><div class="size-box">M</div>
@@ -250,13 +264,17 @@
                     <button class="add-cart-btn">ADD TO CART</button>
                 </div>
             </div>
-            <p class="product-name">Navy Lightweight Bomber Jacket</p>
+            <a href="product_detail.html" class="product-link">
+                <p class="product-name">Navy Lightweight Bomber Jacket</p>
+            </a>
             <p class="product-price" data-price="899">₹899</p>
         </div>
 
         <div class="product-card" data-id="3">
             <div class="product-image-container">
-                <img src="Assets/jacket11.webp" alt="Beige Shirt" class="product-image">
+                <a href="product_detail.html">
+                    <img src="Assets/jacket11.webp" alt="Beige Shirt" class="product-image">
+                </a>
                 <div class="hover-overlay">
                     <div class="size-selection">
                         <div class="size-box">S</div><div class="size-box">M</div>
@@ -264,13 +282,17 @@
                     <button class="add-cart-btn">ADD TO CART</button>
                 </div>
             </div>
-            <p class="product-name">Textured Varsity Cardigan/Jacket</p>
+            <a href="product_detail.html" class="product-link">
+                <p class="product-name">Textured Varsity Cardigan/Jacket</p>
+            </a>
             <p class="product-price" data-price="999">₹999</p>
         </div>
 
         <div class="product-card" data-id="4">
             <div class="product-image-container">
-                <img src="Assets/jacket12.webp" alt="Navy Blue Shirt" class="product-image">
+                <a href="product_detail.html">
+                    <img src="Assets/jacket12.webp" alt="Navy Blue Shirt" class="product-image">
+                </a>
                 <div class="hover-overlay">
                     <div class="size-selection">
                         <div class="size-box">S</div><div class="size-box">M</div>
@@ -278,225 +300,27 @@
                     <button class="add-cart-btn">ADD TO CART</button>
                 </div>
             </div>
-            <p class="product-name">Monogram Print Bomber Jacket</p>
+            <a href="product_detail.html" class="product-link">
+                <p class="product-name">Monogram Print Bomber Jacket</p>
+            </a>
             <p class="product-price" data-price="15000">₹15000</p>
         </div>
 
         <div class="product-card">
             <div class="product-image-container">
-                <img src="Assets/jacket2.jpg" alt="Beige Shirt" class="product-image">
+                <a href="product_detail.html">
+                    <img src="Assets/jacket2.jpg" alt="Beige Shirt" class="product-image">
+                </a>
                 <div class="hover-overlay">
                     <div class="size-selection">
-                        <div class="size-box">S</div>
-                        <div class="size-box">M</div>
-                        <div class="size-box">L</div>
-                        <div class="size-box">XL</div>
+                        <div class="size-box">S</div><div class="size-box">M</div>
+                        <div class="size-box">L</div><div class="size-box">XL</div>
                     </div>
                     <button class="add-cart-btn">ADD TO CART</button>
                 </div>
             </div>
-            <p class="product-name">Dark Wash Denim Trucker Jacket</p>
+            <a href="product_detail.html" class="product-link">
+                <p class="product-name">Dark Wash Denim Trucker Jacket</p>
+            </a>
             <p class="product-price">₹2000</p>
         </div>
-
-        <div class="product-card">
-            <div class="product-image-container">
-                <img src="Assets/jacket3.jpg" alt="Navy Blue Shirt" class="product-image">
-                <div class="hover-overlay">
-                    <div class="size-selection">
-                        <div class="size-box">S</div>
-                        <div class="size-box">M</div>
-                        <div class="size-box">L</div>
-                        <div class="size-box">XL</div>
-                    </div>
-                    <button class="add-cart-btn">ADD TO CART</button>
-                </div>
-            </div>
-            <p class="product-name">Faux-Fur Trimmed Bomber Jacket</p>
-            <p class="product-price">₹3000</p>
-        </div>
-
-
-        <div class="product-card">
-            <div class="product-image-container">
-                <img src="Assets/jacket4.jpg" alt="Beige Shirt" class="product-image">
-                <div class="hover-overlay">
-                    <div class="size-selection">
-                        <div class="size-box">S</div>
-                        <div class="size-box">M</div>
-                        <div class="size-box">L</div>
-                        <div class="size-box">XL</div>
-                    </div>
-                    <button class="add-cart-btn">ADD TO CART</button>
-                </div>
-            </div>
-            <p class="product-name">Beige Wool-Blend Utility Jacket</p>
-            <p class="product-price">₹3500</p>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image-container">
-                <img src="Assets/jacket5.jpg" alt="Navy Blue Shirt" class="product-image">
-                <div class="hover-overlay">
-                    <div class="size-selection">
-                        <div class="size-box">S</div>
-                        <div class="size-box">M</div>
-                        <div class="size-box">L</div>
-                        <div class="size-box">XL</div>
-                    </div>
-                    <button class="add-cart-btn">ADD TO CART</button>
-                </div>
-            </div>
-            <p class="product-name">Silver-Grey Puffer Jacket</p>
-            <p class="product-price">₹4000</p>
-        </div>
-        
-
-        <div class="product-card">
-            <div class="product-image-container">
-                <img src="Assets/jacket6.jpg" alt="Beige Shirt" class="product-image">
-                <div class="hover-overlay">
-                    <div class="size-selection">
-                        <div class="size-box">S</div>
-                        <div class="size-box">M</div>
-                        <div class="size-box">L</div>
-                        <div class="size-box">XL</div>
-                    </div>
-                    <button class="add-cart-btn">ADD TO CART</button>
-                </div>
-            </div>
-            <p class="product-name">Bomber Jacket</p>
-            <p class="product-price">₹2699</p>
-        </div>
-
-        <div class="product-card">
-            <div class="product-image-container">
-                <img src="Assets/jacket7.jpg" alt="Navy Blue Shirt" class="product-image">
-                <div class="hover-overlay">
-                    <div class="size-selection">
-                        <div class="size-box">S</div>
-                        <div class="size-box">M</div>
-                        <div class="size-box">L</div>
-                        <div class="size-box">XL</div>
-                    </div>
-                    <button class="add-cart-btn">ADD TO CART</button>
-                </div>
-            </div>
-            <p class="product-name">Navy Sherpa-Collar Puffer</p>
-            <p class="product-price">₹5000</p>
-        </div>
-
-         <div class="product-card">
-            <div class="product-image-container">
-                <img src="Assets/jacket8.jpg" alt="Navy Blue Shirt" class="product-image">
-                <div class="hover-overlay">
-                    <div class="size-selection">
-                        <div class="size-box">S</div>
-                        <div class="size-box">M</div>
-                        <div class="size-box">L</div>
-                        <div class="size-box">XL</div>
-                    </div>
-                    <button class="add-cart-btn">ADD TO CART</button>
-                </div>
-            </div>
-            <p class="product-name">Green Varsity Jacket</p>
-            <p class="product-price">₹7000</p>
-        </div>
-
-         <div class="product-card">
-            <div class="product-image-container">
-                <img src="Assets/jacket9.jpg" alt="Navy Blue Shirt" class="product-image">
-                <div class="hover-overlay">
-                    <div class="size-selection">
-                        <div class="size-box">S</div>
-                        <div class="size-box">M</div>
-                        <div class="size-box">L</div>
-                        <div class="size-box">XL</div>
-                    </div>
-                    <button class="add-cart-btn">ADD TO CART</button>
-                </div>
-            </div>
-            <p class="product-name">Grey Overcoat</p>
-            <p class="product-price">₹3000</p>
-        </div>
-
-    </main>
-
-    <script>
-        // 1. Initialize Cart
-        let cart = JSON.parse(localStorage.getItem('myShopCart')) || [];
-        updateCartDisplay();
-
-        // 2. SEARCH LOGIC
-        const searchTrigger = document.getElementById('search-trigger');
-        const searchInput = document.getElementById('search-input');
-        const productCards = document.querySelectorAll('.product-card');
-
-        // Toggle search bar visibility
-        searchTrigger.addEventListener('click', () => {
-            searchInput.classList.toggle('active');
-            if (searchInput.classList.contains('active')) {
-                searchInput.focus();
-            }
-        });
-
-        // Filter products as user types
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
-
-            productCards.forEach(card => {
-                const productName = card.querySelector('.product-name').innerText.toLowerCase();
-                if (productName.includes(query)) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
-            });
-        });
-
-        // 3. Handle Size Selection
-        document.querySelectorAll('.size-box').forEach(box => {
-            box.addEventListener('click', function(e) {
-                e.preventDefault();
-                this.parentElement.querySelectorAll('.size-box').forEach(b => b.classList.remove('selected'));
-                this.classList.add('selected');
-            });
-        });
-
-        // 4. Handle Add to Cart
-        document.querySelectorAll('.add-cart-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const card = this.closest('.product-card');
-                const selectedSizeBox = card.querySelector('.size-box.selected');
-
-                if (!selectedSizeBox) {
-                    alert('Please select a size first!');
-                    return;
-                }
-
-                const priceElement = card.querySelector('.product-price');
-                const priceValue = priceElement.getAttribute('data-price') || "49.99";
-
-                const product = {
-                    id: (card.getAttribute('data-id') || Date.now()) + "-" + selectedSizeBox.innerText,
-                    name: card.querySelector('.product-name').innerText,
-                    price: priceValue,
-                    image: card.querySelector('.product-image').getAttribute('src'),
-                    size: selectedSizeBox.innerText
-                };
-
-                cart.push(product);
-                localStorage.setItem('myShopCart', JSON.stringify(cart));
-                updateCartDisplay();
-                alert(`${product.name} added to cart!`);
-            });
-        });
-
-        function updateCartDisplay() {
-            const countElement = document.getElementById('cart-count');
-            if(countElement) countElement.innerText = cart.length;
-        }
-    </script>
-</body>
-</html>
