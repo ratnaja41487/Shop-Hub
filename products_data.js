@@ -392,12 +392,7 @@ const PRODUCTS_DATA = [
     "category": "Earpods",
     "source_page": "earpods.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Immersive sound meets sleek design. Crystal-clear audio, long battery life, and a snug fit for all-day listening."
   },
   {
@@ -409,12 +404,7 @@ const PRODUCTS_DATA = [
     "category": "Earpods",
     "source_page": "earpods.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Immersive sound meets sleek design. Crystal-clear audio, long battery life, and a snug fit for all-day listening."
   },
   {
@@ -426,12 +416,7 @@ const PRODUCTS_DATA = [
     "category": "Earpods",
     "source_page": "earpods.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Immersive sound meets sleek design. Crystal-clear audio, long battery life, and a snug fit for all-day listening."
   },
   {
@@ -443,12 +428,7 @@ const PRODUCTS_DATA = [
     "category": "Earpods",
     "source_page": "earpods.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Immersive sound meets sleek design. Crystal-clear audio, long battery life, and a snug fit for all-day listening."
   },
   {
@@ -460,12 +440,7 @@ const PRODUCTS_DATA = [
     "category": "Earpods",
     "source_page": "earpods.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Immersive sound meets sleek design. Crystal-clear audio, long battery life, and a snug fit for all-day listening."
   },
   {
@@ -477,12 +452,7 @@ const PRODUCTS_DATA = [
     "category": "Earpods",
     "source_page": "earpods.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Immersive sound meets sleek design. Crystal-clear audio, long battery life, and a snug fit for all-day listening."
   },
   {
@@ -494,12 +464,7 @@ const PRODUCTS_DATA = [
     "category": "Earpods",
     "source_page": "earpods.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Immersive sound meets sleek design. Crystal-clear audio, long battery life, and a snug fit for all-day listening."
   },
   {
@@ -511,12 +476,7 @@ const PRODUCTS_DATA = [
     "category": "Earpods",
     "source_page": "earpods.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Immersive sound meets sleek design. Crystal-clear audio, long battery life, and a snug fit for all-day listening."
   },
   {
@@ -528,12 +488,7 @@ const PRODUCTS_DATA = [
     "category": "Earpods",
     "source_page": "earpods.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Immersive sound meets sleek design. Crystal-clear audio, long battery life, and a snug fit for all-day listening."
   },
   {
@@ -545,12 +500,7 @@ const PRODUCTS_DATA = [
     "category": "Earpods",
     "source_page": "earpods.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Immersive sound meets sleek design. Crystal-clear audio, long battery life, and a snug fit for all-day listening."
   },
   {
@@ -562,12 +512,7 @@ const PRODUCTS_DATA = [
     "category": "Earpods",
     "source_page": "earpods.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Immersive sound meets sleek design. Crystal-clear audio, long battery life, and a snug fit for all-day listening."
   },
   {
@@ -579,12 +524,7 @@ const PRODUCTS_DATA = [
     "category": "Earpods",
     "source_page": "earpods.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Immersive sound meets sleek design. Crystal-clear audio, long battery life, and a snug fit for all-day listening."
   },
   {
@@ -596,12 +536,7 @@ const PRODUCTS_DATA = [
     "category": "Fridges",
     "source_page": "fridge.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Keep your food fresh longer with advanced cooling technology. Energy-efficient and spacious, built for modern kitchens."
   },
   {
@@ -613,12 +548,7 @@ const PRODUCTS_DATA = [
     "category": "Fridges",
     "source_page": "fridge.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Keep your food fresh longer with advanced cooling technology. Energy-efficient and spacious, built for modern kitchens."
   },
   {
@@ -630,12 +560,7 @@ const PRODUCTS_DATA = [
     "category": "Fridges",
     "source_page": "fridge.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Keep your food fresh longer with advanced cooling technology. Energy-efficient and spacious, built for modern kitchens."
   },
   {
@@ -647,12 +572,7 @@ const PRODUCTS_DATA = [
     "category": "Fridges",
     "source_page": "fridge.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Keep your food fresh longer with advanced cooling technology. Energy-efficient and spacious, built for modern kitchens."
   },
   {
@@ -664,12 +584,7 @@ const PRODUCTS_DATA = [
     "category": "Fridges",
     "source_page": "fridge.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Keep your food fresh longer with advanced cooling technology. Energy-efficient and spacious, built for modern kitchens."
   },
   {
@@ -681,12 +596,7 @@ const PRODUCTS_DATA = [
     "category": "Fridges",
     "source_page": "fridge.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Keep your food fresh longer with advanced cooling technology. Energy-efficient and spacious, built for modern kitchens."
   },
   {
@@ -698,12 +608,7 @@ const PRODUCTS_DATA = [
     "category": "Fridges",
     "source_page": "fridge.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Keep your food fresh longer with advanced cooling technology. Energy-efficient and spacious, built for modern kitchens."
   },
   {
@@ -715,12 +620,7 @@ const PRODUCTS_DATA = [
     "category": "Fridges",
     "source_page": "fridge.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Keep your food fresh longer with advanced cooling technology. Energy-efficient and spacious, built for modern kitchens."
   },
   {
@@ -732,12 +632,7 @@ const PRODUCTS_DATA = [
     "category": "Fridges",
     "source_page": "fridge.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Keep your food fresh longer with advanced cooling technology. Energy-efficient and spacious, built for modern kitchens."
   },
   {
@@ -749,12 +644,7 @@ const PRODUCTS_DATA = [
     "category": "Fridges",
     "source_page": "fridge.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Keep your food fresh longer with advanced cooling technology. Energy-efficient and spacious, built for modern kitchens."
   },
   {
@@ -766,12 +656,7 @@ const PRODUCTS_DATA = [
     "category": "Fridges",
     "source_page": "fridge.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Keep your food fresh longer with advanced cooling technology. Energy-efficient and spacious, built for modern kitchens."
   },
   {
@@ -783,12 +668,7 @@ const PRODUCTS_DATA = [
     "category": "Fridges",
     "source_page": "fridge.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Keep your food fresh longer with advanced cooling technology. Energy-efficient and spacious, built for modern kitchens."
   },
   {
@@ -993,12 +873,7 @@ const PRODUCTS_DATA = [
     "category": "Jewellery",
     "source_page": "Jewellery.html",
     "hub_page": "women.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Elevate every look with handcrafted elegance. Each piece is designed to complement your unique style."
   },
   {
@@ -1027,12 +902,7 @@ const PRODUCTS_DATA = [
     "category": "Jewellery",
     "source_page": "Jewellery.html",
     "hub_page": "women.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Elevate every look with handcrafted elegance. Each piece is designed to complement your unique style."
   },
   {
@@ -1044,12 +914,7 @@ const PRODUCTS_DATA = [
     "category": "Jewellery",
     "source_page": "Jewellery.html",
     "hub_page": "women.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Elevate every look with handcrafted elegance. Each piece is designed to complement your unique style."
   },
   {
@@ -1061,12 +926,7 @@ const PRODUCTS_DATA = [
     "category": "Jewellery",
     "source_page": "Jewellery.html",
     "hub_page": "women.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Elevate every look with handcrafted elegance. Each piece is designed to complement your unique style."
   },
   {
@@ -1078,12 +938,7 @@ const PRODUCTS_DATA = [
     "category": "Jewellery",
     "source_page": "Jewellery.html",
     "hub_page": "women.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Elevate every look with handcrafted elegance. Each piece is designed to complement your unique style."
   },
   {
@@ -1095,12 +950,7 @@ const PRODUCTS_DATA = [
     "category": "Jewellery",
     "source_page": "Jewellery.html",
     "hub_page": "women.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Elevate every look with handcrafted elegance. Each piece is designed to complement your unique style."
   },
   {
@@ -1112,12 +962,7 @@ const PRODUCTS_DATA = [
     "category": "Jewellery",
     "source_page": "Jewellery.html",
     "hub_page": "women.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Elevate every look with handcrafted elegance. Each piece is designed to complement your unique style."
   },
   {
@@ -1129,12 +974,7 @@ const PRODUCTS_DATA = [
     "category": "Jewellery",
     "source_page": "Jewellery.html",
     "hub_page": "women.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+   
     "description": "Elevate every look with handcrafted elegance. Each piece is designed to complement your unique style."
   },
   {
@@ -1146,12 +986,7 @@ const PRODUCTS_DATA = [
     "category": "Jewellery",
     "source_page": "Jewellery.html",
     "hub_page": "women.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+   
     "description": "Elevate every look with handcrafted elegance. Each piece is designed to complement your unique style."
   },
   {
@@ -1163,12 +998,7 @@ const PRODUCTS_DATA = [
     "category": "Jewellery",
     "source_page": "Jewellery.html",
     "hub_page": "women.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+   
     "description": "Elevate every look with handcrafted elegance. Each piece is designed to complement your unique style."
   },
   {
@@ -1180,12 +1010,7 @@ const PRODUCTS_DATA = [
     "category": "Jewellery",
     "source_page": "Jewellery.html",
     "hub_page": "women.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Elevate every look with handcrafted elegance. Each piece is designed to complement your unique style."
   },
   {
@@ -1197,12 +1022,7 @@ const PRODUCTS_DATA = [
     "category": "Laptops",
     "source_page": "laptop.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+   
     "description": "Powerful performance meets ultra-portable design. Built for work, creativity, and everything in between."
   },
   {
@@ -1214,12 +1034,7 @@ const PRODUCTS_DATA = [
     "category": "Laptops",
     "source_page": "laptop.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Powerful performance meets ultra-portable design. Built for work, creativity, and everything in between."
   },
   {
@@ -1231,12 +1046,7 @@ const PRODUCTS_DATA = [
     "category": "Laptops",
     "source_page": "laptop.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Powerful performance meets ultra-portable design. Built for work, creativity, and everything in between."
   },
   {
@@ -1248,12 +1058,7 @@ const PRODUCTS_DATA = [
     "category": "Laptops",
     "source_page": "laptop.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+   
     "description": "Powerful performance meets ultra-portable design. Built for work, creativity, and everything in between."
   },
   {
@@ -1265,12 +1070,7 @@ const PRODUCTS_DATA = [
     "category": "Laptops",
     "source_page": "laptop.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Powerful performance meets ultra-portable design. Built for work, creativity, and everything in between."
   },
   {
@@ -1282,12 +1082,7 @@ const PRODUCTS_DATA = [
     "category": "Laptops",
     "source_page": "laptop.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+   
     "description": "Powerful performance meets ultra-portable design. Built for work, creativity, and everything in between."
   },
   {
@@ -1299,12 +1094,7 @@ const PRODUCTS_DATA = [
     "category": "Laptops",
     "source_page": "laptop.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+   
     "description": "Powerful performance meets ultra-portable design. Built for work, creativity, and everything in between."
   },
   {
@@ -1316,12 +1106,7 @@ const PRODUCTS_DATA = [
     "category": "Laptops",
     "source_page": "laptop.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Powerful performance meets ultra-portable design. Built for work, creativity, and everything in between."
   },
   {
@@ -1333,12 +1118,7 @@ const PRODUCTS_DATA = [
     "category": "Laptops",
     "source_page": "laptop.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Powerful performance meets ultra-portable design. Built for work, creativity, and everything in between."
   },
   {
@@ -1350,12 +1130,7 @@ const PRODUCTS_DATA = [
     "category": "Laptops",
     "source_page": "laptop.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Powerful performance meets ultra-portable design. Built for work, creativity, and everything in between."
   },
   {
@@ -1367,12 +1142,7 @@ const PRODUCTS_DATA = [
     "category": "Laptops",
     "source_page": "laptop.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+   
     "description": "Powerful performance meets ultra-portable design. Built for work, creativity, and everything in between."
   },
   {
@@ -1384,12 +1154,7 @@ const PRODUCTS_DATA = [
     "category": "Laptops",
     "source_page": "laptop.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Powerful performance meets ultra-portable design. Built for work, creativity, and everything in between."
   },
   {
@@ -1401,12 +1166,7 @@ const PRODUCTS_DATA = [
     "category": "Mobiles",
     "source_page": "mobile.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+   
     "description": "Stay connected with cutting-edge technology. Fast processor, stunning display, and a camera that captures every moment."
   },
   {
@@ -1418,12 +1178,7 @@ const PRODUCTS_DATA = [
     "category": "Mobiles",
     "source_page": "mobile.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Stay connected with cutting-edge technology. Fast processor, stunning display, and a camera that captures every moment."
   },
   {
@@ -1435,12 +1190,7 @@ const PRODUCTS_DATA = [
     "category": "Mobiles",
     "source_page": "mobile.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+   
     "description": "Stay connected with cutting-edge technology. Fast processor, stunning display, and a camera that captures every moment."
   },
   {
@@ -1452,12 +1202,7 @@ const PRODUCTS_DATA = [
     "category": "Mobiles",
     "source_page": "mobile.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Stay connected with cutting-edge technology. Fast processor, stunning display, and a camera that captures every moment."
   },
   {
@@ -1469,12 +1214,7 @@ const PRODUCTS_DATA = [
     "category": "Mobiles",
     "source_page": "mobile.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+  
     "description": "Stay connected with cutting-edge technology. Fast processor, stunning display, and a camera that captures every moment."
   },
   {
@@ -1486,12 +1226,7 @@ const PRODUCTS_DATA = [
     "category": "Mobiles",
     "source_page": "mobile.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Stay connected with cutting-edge technology. Fast processor, stunning display, and a camera that captures every moment."
   },
   {
@@ -1503,12 +1238,7 @@ const PRODUCTS_DATA = [
     "category": "Mobiles",
     "source_page": "mobile.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Stay connected with cutting-edge technology. Fast processor, stunning display, and a camera that captures every moment."
   },
   {
@@ -1520,12 +1250,7 @@ const PRODUCTS_DATA = [
     "category": "Mobiles",
     "source_page": "mobile.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Stay connected with cutting-edge technology. Fast processor, stunning display, and a camera that captures every moment."
   },
   {
@@ -1537,12 +1262,7 @@ const PRODUCTS_DATA = [
     "category": "Mobiles",
     "source_page": "mobile.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Stay connected with cutting-edge technology. Fast processor, stunning display, and a camera that captures every moment."
   },
   {
@@ -1554,12 +1274,7 @@ const PRODUCTS_DATA = [
     "category": "Mobiles",
     "source_page": "mobile.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Stay connected with cutting-edge technology. Fast processor, stunning display, and a camera that captures every moment."
   },
   {
@@ -1571,12 +1286,7 @@ const PRODUCTS_DATA = [
     "category": "Mobiles",
     "source_page": "mobile.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Stay connected with cutting-edge technology. Fast processor, stunning display, and a camera that captures every moment."
   },
   {
@@ -1588,12 +1298,7 @@ const PRODUCTS_DATA = [
     "category": "Mobiles",
     "source_page": "mobile.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Stay connected with cutting-edge technology. Fast processor, stunning display, and a camera that captures every moment."
   },
   {
@@ -2413,12 +2118,7 @@ const PRODUCTS_DATA = [
     "category": "Toys",
     "source_page": "toys.html",
     "hub_page": "kids.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Spark imagination and endless fun. Safe, durable toys designed to bring joy and learning together."
   },
   {
@@ -2430,12 +2130,7 @@ const PRODUCTS_DATA = [
     "category": "Toys",
     "source_page": "toys.html",
     "hub_page": "kids.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Spark imagination and endless fun. Safe, durable toys designed to bring joy and learning together."
   },
   {
@@ -2447,12 +2142,7 @@ const PRODUCTS_DATA = [
     "category": "Toys",
     "source_page": "toys.html",
     "hub_page": "kids.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Spark imagination and endless fun. Safe, durable toys designed to bring joy and learning together."
   },
   {
@@ -2464,12 +2154,7 @@ const PRODUCTS_DATA = [
     "category": "Toys",
     "source_page": "toys.html",
     "hub_page": "kids.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Spark imagination and endless fun. Safe, durable toys designed to bring joy and learning together."
   },
   {
@@ -2481,12 +2166,7 @@ const PRODUCTS_DATA = [
     "category": "Toys",
     "source_page": "toys.html",
     "hub_page": "kids.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Spark imagination and endless fun. Safe, durable toys designed to bring joy and learning together."
   },
   {
@@ -2498,12 +2178,7 @@ const PRODUCTS_DATA = [
     "category": "Toys",
     "source_page": "toys.html",
     "hub_page": "kids.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Spark imagination and endless fun. Safe, durable toys designed to bring joy and learning together."
   },
   {
@@ -2515,12 +2190,7 @@ const PRODUCTS_DATA = [
     "category": "Toys",
     "source_page": "toys.html",
     "hub_page": "kids.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Spark imagination and endless fun. Safe, durable toys designed to bring joy and learning together."
   },
   {
@@ -2532,12 +2202,7 @@ const PRODUCTS_DATA = [
     "category": "Toys",
     "source_page": "toys.html",
     "hub_page": "kids.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Spark imagination and endless fun. Safe, durable toys designed to bring joy and learning together."
   },
   {
@@ -2549,12 +2214,7 @@ const PRODUCTS_DATA = [
     "category": "Toys",
     "source_page": "toys.html",
     "hub_page": "kids.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Spark imagination and endless fun. Safe, durable toys designed to bring joy and learning together."
   },
   {
@@ -2566,12 +2226,7 @@ const PRODUCTS_DATA = [
     "category": "Toys",
     "source_page": "toys.html",
     "hub_page": "kids.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Spark imagination and endless fun. Safe, durable toys designed to bring joy and learning together."
   },
   {
@@ -2583,12 +2238,7 @@ const PRODUCTS_DATA = [
     "category": "Toys",
     "source_page": "toys.html",
     "hub_page": "kids.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Spark imagination and endless fun. Safe, durable toys designed to bring joy and learning together."
   },
   {
@@ -2600,12 +2250,7 @@ const PRODUCTS_DATA = [
     "category": "Toys",
     "source_page": "toys.html",
     "hub_page": "kids.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+   
     "description": "Spark imagination and endless fun. Safe, durable toys designed to bring joy and learning together."
   },
   {
@@ -2821,12 +2466,7 @@ const PRODUCTS_DATA = [
     "category": "TVs",
     "source_page": "tv.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Cinematic visuals from the comfort of your home. Stunning resolution and vivid colors for an immersive viewing experience."
   },
   {
@@ -2838,12 +2478,7 @@ const PRODUCTS_DATA = [
     "category": "TVs",
     "source_page": "tv.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Cinematic visuals from the comfort of your home. Stunning resolution and vivid colors for an immersive viewing experience."
   },
   {
@@ -2855,12 +2490,7 @@ const PRODUCTS_DATA = [
     "category": "TVs",
     "source_page": "tv.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Cinematic visuals from the comfort of your home. Stunning resolution and vivid colors for an immersive viewing experience."
   },
   {
@@ -2872,12 +2502,7 @@ const PRODUCTS_DATA = [
     "category": "TVs",
     "source_page": "tv.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Cinematic visuals from the comfort of your home. Stunning resolution and vivid colors for an immersive viewing experience."
   },
   {
@@ -2889,12 +2514,7 @@ const PRODUCTS_DATA = [
     "category": "TVs",
     "source_page": "tv.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Cinematic visuals from the comfort of your home. Stunning resolution and vivid colors for an immersive viewing experience."
   },
   {
@@ -2906,12 +2526,7 @@ const PRODUCTS_DATA = [
     "category": "TVs",
     "source_page": "tv.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+    
     "description": "Cinematic visuals from the comfort of your home. Stunning resolution and vivid colors for an immersive viewing experience."
   },
   {
@@ -2923,12 +2538,7 @@ const PRODUCTS_DATA = [
     "category": "TVs",
     "source_page": "tv.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Cinematic visuals from the comfort of your home. Stunning resolution and vivid colors for an immersive viewing experience."
   },
   {
@@ -2940,12 +2550,7 @@ const PRODUCTS_DATA = [
     "category": "TVs",
     "source_page": "tv.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Cinematic visuals from the comfort of your home. Stunning resolution and vivid colors for an immersive viewing experience."
   },
   {
@@ -2957,12 +2562,7 @@ const PRODUCTS_DATA = [
     "category": "TVs",
     "source_page": "tv.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Cinematic visuals from the comfort of your home. Stunning resolution and vivid colors for an immersive viewing experience."
   },
   {
@@ -2974,12 +2574,7 @@ const PRODUCTS_DATA = [
     "category": "TVs",
     "source_page": "tv.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Cinematic visuals from the comfort of your home. Stunning resolution and vivid colors for an immersive viewing experience."
   },
   {
@@ -2991,12 +2586,7 @@ const PRODUCTS_DATA = [
     "category": "TVs",
     "source_page": "tv.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Cinematic visuals from the comfort of your home. Stunning resolution and vivid colors for an immersive viewing experience."
   },
   {
@@ -3008,12 +2598,7 @@ const PRODUCTS_DATA = [
     "category": "TVs",
     "source_page": "tv.html",
     "hub_page": "Electronic.html",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
+     
     "description": "Cinematic visuals from the comfort of your home. Stunning resolution and vivid colors for an immersive viewing experience."
   },
   {
@@ -3026,10 +2611,10 @@ const PRODUCTS_DATA = [
     "source_page": "watches.html",
     "hub_page": "Electronic.html",
     "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
+      "5",
+      "6",
+      "7",
+      "8"
     ],
     "description": "More than timekeeping \u2014 a statement of refined taste. Precision craftsmanship on your wrist."
   },
@@ -3043,10 +2628,10 @@ const PRODUCTS_DATA = [
     "source_page": "watches.html",
     "hub_page": "Electronic.html",
     "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
+      "5",
+      "6",
+      "7",
+      "8"
     ],
     "description": "More than timekeeping \u2014 a statement of refined taste. Precision craftsmanship on your wrist."
   },
@@ -3060,10 +2645,10 @@ const PRODUCTS_DATA = [
     "source_page": "watches.html",
     "hub_page": "Electronic.html",
     "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
+      "5",
+      "6",
+      "7",
+      "8"
     ],
     "description": "More than timekeeping \u2014 a statement of refined taste. Precision craftsmanship on your wrist."
   },
@@ -3077,10 +2662,10 @@ const PRODUCTS_DATA = [
     "source_page": "watches.html",
     "hub_page": "Electronic.html",
     "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
+      "5",
+      "6",
+      "7",
+      "8"
     ],
     "description": "More than timekeeping \u2014 a statement of refined taste. Precision craftsmanship on your wrist."
   },
@@ -3094,10 +2679,10 @@ const PRODUCTS_DATA = [
     "source_page": "watches.html",
     "hub_page": "Electronic.html",
     "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
+      "5",
+      "6",
+      "7",
+      "8"
     ],
     "description": "More than timekeeping \u2014 a statement of refined taste. Precision craftsmanship on your wrist."
   },
@@ -3111,10 +2696,10 @@ const PRODUCTS_DATA = [
     "source_page": "watches.html",
     "hub_page": "Electronic.html",
     "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
+      "5",
+      "6",
+      "7",
+      "8"
     ],
     "description": "More than timekeeping \u2014 a statement of refined taste. Precision craftsmanship on your wrist."
   },
@@ -3128,10 +2713,10 @@ const PRODUCTS_DATA = [
     "source_page": "watches.html",
     "hub_page": "Electronic.html",
     "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
+      "5",
+      "6",
+      "7",
+      "8"
     ],
     "description": "More than timekeeping \u2014 a statement of refined taste. Precision craftsmanship on your wrist."
   },
@@ -3145,10 +2730,10 @@ const PRODUCTS_DATA = [
     "source_page": "watches.html",
     "hub_page": "Electronic.html",
     "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
+      "5",
+      "6",
+      "7",
+      "8"
     ],
     "description": "More than timekeeping \u2014 a statement of refined taste. Precision craftsmanship on your wrist."
   },
@@ -3162,10 +2747,10 @@ const PRODUCTS_DATA = [
     "source_page": "watches.html",
     "hub_page": "Electronic.html",
     "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
+      "5",
+      "6",
+      "7",
+      "8"
     ],
     "description": "More than timekeeping \u2014 a statement of refined taste. Precision craftsmanship on your wrist."
   },
@@ -3179,10 +2764,10 @@ const PRODUCTS_DATA = [
     "source_page": "watches.html",
     "hub_page": "Electronic.html",
     "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
+      "5",
+      "6",
+      "7",
+      "8"
     ],
     "description": "More than timekeeping \u2014 a statement of refined taste. Precision craftsmanship on your wrist."
   },
@@ -3196,10 +2781,10 @@ const PRODUCTS_DATA = [
     "source_page": "watches.html",
     "hub_page": "Electronic.html",
     "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
+      "5",
+      "6",
+      "7",
+      "8"
     ],
     "description": "More than timekeeping \u2014 a statement of refined taste. Precision craftsmanship on your wrist."
   },
@@ -3213,10 +2798,10 @@ const PRODUCTS_DATA = [
     "source_page": "watches.html",
     "hub_page": "Electronic.html",
     "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
+     "5",
+      "6",
+      "7",
+      "8"
     ],
     "description": "More than timekeeping \u2014 a statement of refined taste. Precision craftsmanship on your wrist."
   },

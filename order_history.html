@@ -29,7 +29,7 @@
     <nav class="flex items-center gap-5 text-sm text-gray-600">
       <a href="profile.html" class="hover:text-purple-600"><i class="fas fa-user mr-1"></i>Profile</a>
       <a href="wishlist.html" class="hover:text-purple-600"><i class="fas fa-heart mr-1"></i>Wishlist</a>
-      <a href="cart.html" class="relative hover:text-purple-600">
+      <a href="cart (1).html" class="relative hover:text-purple-600">
         <i class="fas fa-shopping-cart text-xl"></i>
         <span id="cart-badge" class="absolute -top-2 -right-2 bg-purple-600 text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center">0</span>
       </a>
@@ -90,281 +90,328 @@
 </div>
 
 <script>
-  let allOrders = [];
-  let activeFilter = 'all';
+let allOrders = [];
+let activeFilter = 'all';
 
-  // ─── Load & Seed Data ──────────────────────────────────────────────────────
-  function loadOrders() {
+// ─── Load & Seed Data ──────────────────────────────────────────────────────
+function loadOrders() {
+  try {
     allOrders = JSON.parse(localStorage.getItem('shopHubOrders') || '[]');
-
-    // Seed demo orders if empty (so page isn't blank for new users)
-    if (allOrders.length === 0) {
-      const demo = [
-        {
-          id: 'SH78432910', date: new Date(Date.now() - 2*86400000).toISOString(),
-          items: [{ name: 'Classic White Shirt', price: 699, qty: 2, size: 'M', image: 'Assets/shirt10.webp' },
-                  { name: 'Slim Fit Pants', price: 999, qty: 1, size: 'L', image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=80' }],
-          address: { name: 'Ravi Kumar', city: 'Hyderabad', state: 'Telangana', pin: '500001' },
-          payment: 'upi', total: 2097, status: 'shipped',
-          deliveryDate: new Date(Date.now() + 3*86400000).toISOString()
-        },
-        {
-          id: 'SH65219847', date: new Date(Date.now() - 10*86400000).toISOString(),
-          items: [{ name: 'Wireless Earbuds', price: 1999, qty: 1, size: '', image: 'https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?w=80' }],
-          address: { name: 'Ravi Kumar', city: 'Hyderabad', state: 'Telangana', pin: '500001' },
-          payment: 'card', total: 1799, status: 'delivered',
-          deliveryDate: new Date(Date.now() - 3*86400000).toISOString()
-        },
-        {
-          id: 'SH44128763', date: new Date(Date.now() - 20*86400000).toISOString(),
-          items: [{ name: 'Gold Necklace Set', price: 4999, qty: 1, size: '', image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=80' }],
-          address: { name: 'Ravi Kumar', city: 'Hyderabad', state: 'Telangana', pin: '500001' },
-          payment: 'cod', total: 4999, status: 'confirmed',
-          deliveryDate: new Date(Date.now() + 7*86400000).toISOString()
-        }
-      ];
-      localStorage.setItem('shopHubOrders', JSON.stringify(demo));
-      allOrders = demo;
-    }
+  } catch (e) {
+    console.error("Failed to parse orders from localStorage:", e);
+    allOrders = [];
   }
 
-  // ─── Render ────────────────────────────────────────────────────────────────
-  function renderOrders(orders) {
-    const list = document.getElementById('orders-list');
-    const empty = document.getElementById('empty-state');
+  // Seed demo orders if empty
+  if (allOrders.length === 0) {
+    const demo = [
+      {
+        id: 'SH78432910', 
+        date: new Date(Date.now() - 2*86400000).toISOString(),
+        items: [
+          { name: 'Classic White Shirt', price: 699, qty: 2, size: 'M', image: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=150' },
+          { name: 'Slim Fit Pants', price: 999, qty: 1, size: 'L', image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=150' }
+        ],
+        address: { name: 'Ravi Kumar', city: 'Hyderabad', state: 'Telangana', pin: '500001' },
+        payment: 'upi', 
+        total: 2097, 
+        status: 'shipped',
+        deliveryDate: new Date(Date.now() + 3*86400000).toISOString()
+      },
+      {
+        id: 'SH65219847', 
+        date: new Date(Date.now() - 10*86400000).toISOString(),
+        items: [
+          { name: 'Wireless Earbuds', price: 1999, qty: 1, size: '', image: 'https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?w=150' }
+        ],
+        address: { name: 'Ravi Kumar', city: 'Hyderabad', state: 'Telangana', pin: '500001' },
+        payment: 'card', 
+        total: 1799, 
+        status: 'delivered',
+        deliveryDate: new Date(Date.now() - 3*86400000).toISOString()
+      },
+      {
+        id: 'SH44128763', 
+        date: new Date(Date.now() - 20*86400000).toISOString(),
+        items: [
+          { name: 'Gold Necklace Set', price: 4999, qty: 1, size: '', image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=150' }
+        ],
+        address: { name: 'Ravi Kumar', city: 'Hyderabad', state: 'Telangana', pin: '500001' },
+        payment: 'cod', 
+        total: 4999, 
+        status: 'confirmed',
+        deliveryDate: new Date(Date.now() + 7*86400000).toISOString()
+      }
+    ];
+    localStorage.setItem('shopHubOrders', JSON.stringify(demo));
+    allOrders = demo;
+  }
+}
 
-    if (orders.length === 0) {
-      list.innerHTML = '';
-      empty.classList.remove('hidden');
-      return;
-    }
-    empty.classList.add('hidden');
+// ─── Render Dashboard ───────────────────────────────────────────────────────
+function renderOrders(orders) {
+  const list = document.getElementById('orders-list');
+  const empty = document.getElementById('empty-state');
 
-    list.innerHTML = orders.map(order => {
-      const date = new Date(order.date).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
-      const delivDate = new Date(order.deliveryDate).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
-      const statusLabel = order.status.charAt(0).toUpperCase() + order.status.slice(1);
-      const previewItems = order.items.slice(0, 3);
-      const extraCount = order.items.length - 3;
+  if (!orders || orders.length === 0) {
+    list.innerHTML = '';
+    empty.classList.remove('hidden');
+    return;
+  }
+  empty.classList.add('hidden');
 
-      return `
-        <div class="order-card bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
-          <!-- Order Header -->
-          <div class="flex flex-wrap items-center justify-between px-5 py-4 border-b gap-3">
-            <div class="flex items-center gap-4">
-              <div>
-                <p class="text-xs text-gray-400">Order ID</p>
-                <p class="font-bold text-gray-800 text-sm">#${order.id}</p>
-              </div>
-              <div>
-                <p class="text-xs text-gray-400">Placed on</p>
-                <p class="font-semibold text-gray-700 text-sm">${date}</p>
-              </div>
-              <div>
-                <p class="text-xs text-gray-400">${order.status === 'delivered' ? 'Delivered' : 'Expected by'}</p>
-                <p class="font-semibold text-gray-700 text-sm">${delivDate}</p>
-              </div>
+  list.innerHTML = orders.map(order => {
+    const date = new Date(order.date).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+    const delivDate = new Date(order.deliveryDate).toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' });
+    const statusLabel = order.status.charAt(0).toUpperCase() + order.status.slice(1);
+    const previewItems = order.items.slice(0, 3);
+    const extraCount = order.items.length - 3;
+
+    return `
+      <div class="order-card bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+        <div class="flex flex-wrap items-center justify-between px-5 py-4 border-b gap-3">
+          <div class="flex items-center gap-6">
+            <div>
+              <p class="text-[11px] uppercase tracking-wider text-gray-400 font-semibold">Order ID</p>
+              <p class="font-bold text-gray-800 text-sm">#${order.id}</p>
             </div>
-            <div class="flex items-center gap-3">
-              <span class="status-${order.status} px-3 py-1 rounded-full text-xs font-bold">${statusLabel}</span>
-              <span class="font-bold text-purple-700">₹${order.total?.toLocaleString('en-IN')}</span>
+            <div>
+              <p class="text-[11px] uppercase tracking-wider text-gray-400 font-semibold">Placed on</p>
+              <p class="font-semibold text-gray-700 text-sm">${date}</p>
+            </div>
+            <div>
+              <p class="text-[11px] uppercase tracking-wider text-gray-400 font-semibold">
+                ${order.status === 'delivered' ? 'Delivered' : 'Expected by'}
+              </p>
+              <p class="font-semibold text-gray-700 text-sm">${delivDate}</p>
             </div>
           </div>
-
-          <!-- Items Preview -->
-          <div class="px-5 py-4 flex items-center gap-4">
-            <div class="flex -space-x-3">
-              ${previewItems.map(item => `
-                <img src="${item.image}" class="w-14 h-14 rounded-xl object-cover border-2 border-white bg-gray-100"
-                  onerror="this.src='https://via.placeholder.com/56'">
-              `).join('')}
-              ${extraCount > 0 ? `<div class="w-14 h-14 rounded-xl bg-purple-100 border-2 border-white flex items-center justify-center text-purple-600 font-bold text-sm">+${extraCount}</div>` : ''}
-            </div>
-            <div class="flex-1">
-              <p class="text-sm font-semibold text-gray-900">${order.items[0].name}${order.items.length > 1 ? ` + ${order.items.length - 1} more` : ''}</p>
-              <p class="text-xs text-gray-500 mt-0.5">${order.items.reduce((s,i) => s + i.qty, 0)} item(s) · via ${payLabel(order.payment)}</p>
-            </div>
+          <div class="flex items-center gap-3">
+            <span class="status-${order.status} px-3 py-1 rounded-full text-xs font-bold">${statusLabel}</span>
+            <span class="font-bold text-purple-700">₹${Number(order.total).toLocaleString('en-IN')}</span>
           </div>
+        </div>
 
-          <!-- Tracking Bar (if not cancelled) -->
-          ${order.status !== 'cancelled' ? `
-          <div class="px-5 pb-4">
-            ${trackingBar(order.status)}
-          </div>` : ''}
+        <div class="px-5 py-4 flex items-center gap-4">
+          <div class="flex -space-x-3 isolate">
+            ${previewItems.map(item => `
+              <img src="${item.image}" class="w-14 h-14 rounded-xl object-cover border-2 border-white bg-gray-50 shadow-sm"
+                onerror="this.src='https://via.placeholder.com/56'">
+            `).join('')}
+            ${extraCount > 0 ? `<div class="w-14 h-14 rounded-xl bg-purple-100 border-2 border-white flex items-center justify-center text-purple-600 font-bold text-sm z-10 shadow-sm">+${extraCount}</div>` : ''}
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold text-gray-900 truncate">
+              ${order.items[0]?.name || 'ShopHub Premium Product'}${order.items.length > 1 ? ` + ${order.items.length - 1} more` : ''}
+            </p>
+            <p class="text-xs text-gray-500 mt-0.5">
+              ${order.items.reduce((sum, item) => sum + item.qty, 0)} item(s) · Payment via ${payLabel(order.payment)}
+            </p>
+          </div>
+        </div>
 
-          <!-- Actions -->
-          <div class="flex flex-wrap gap-2 px-5 py-3 bg-gray-50 border-t">
-            <button onclick="openModal('${order.id}')" class="text-sm font-bold text-purple-600 border border-purple-200 px-4 py-2 rounded-lg hover:bg-purple-50 transition-colors">
+        ${order.status !== 'cancelled' ? `
+        <div class="px-5 pb-5 pt-2 border-t border-gray-50 bg-gray-50/30">
+          ${trackingBar(order.status)}
+        </div>` : ''}
+
+        <div class="flex flex-wrap items-center justify-between gap-2 px-5 py-3 bg-gray-50 border-t border-gray-100">
+          <div class="flex gap-2">
+            <button onclick="openModal('${order.id}')" class="text-sm font-bold text-purple-600 border border-purple-200 px-4 py-2 rounded-lg hover:bg-purple-50 transition-all bg-white">
               <i class="fas fa-eye mr-1"></i> View Details
             </button>
-            ${order.status === 'delivered' ? `
-            <button onclick="reorder('${order.id}')" class="text-sm font-bold text-white bg-purple-600 px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
-              <i class="fas fa-redo mr-1"></i> Buy Again
-            </button>` : ''}
             ${order.status === 'confirmed' ? `
-            <button onclick="cancelOrder('${order.id}')" class="text-sm font-bold text-red-500 border border-red-200 px-4 py-2 rounded-lg hover:bg-red-50 transition-colors">
+            <button onclick="cancelOrder('${order.id}')" class="text-sm font-bold text-red-500 border border-red-200 px-4 py-2 rounded-lg hover:bg-red-50 transition-all bg-white">
               <i class="fas fa-times mr-1"></i> Cancel Order
             </button>` : ''}
-            <a href="track-order.html?id=${order.id}" class="text-sm font-bold text-gray-600 border border-gray-200 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors">
-              <i class="fas fa-truck mr-1"></i> Track
-            </a>
+            ${order.status === 'delivered' ? `
+            <button onclick="reorder('${order.id}')" class="text-sm font-bold text-white bg-purple-600 px-4 py-2 rounded-lg hover:bg-purple-700 transition-all shadow-sm">
+              <i class="fas fa-redo mr-1"></i> Buy Again
+            </button>` : ''}
           </div>
-        </div>
-      `;
-    }).join('');
-  }
-
-  function trackingBar(status) {
-    const steps = ['confirmed','shipped','delivered'];
-    const idx = steps.indexOf(status);
-    return `
-      <div class="flex items-center gap-0 mt-1">
-        ${steps.map((s, i) => `
-          <div class="flex items-center gap-1 flex-1 ${i < steps.length-1 ? '' : ''}">
-            <div class="flex flex-col items-center">
-              <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold
-                ${i <= idx ? 'bg-purple-600 text-white' : 'bg-gray-200 text-gray-400'}">
-                ${i < idx ? '<i class="fas fa-check text-xs"></i>' : i+1}
-              </div>
-              <p class="text-xs mt-1 ${i <= idx ? 'text-purple-600 font-semibold' : 'text-gray-400'} whitespace-nowrap">
-                ${s.charAt(0).toUpperCase()+s.slice(1)}
-              </p>
-            </div>
-            ${i < steps.length-1 ? `<div class="flex-1 h-0.5 mb-4 mx-1 ${i < idx ? 'bg-purple-600' : 'bg-gray-200'}"></div>` : ''}
-          </div>
-        `).join('')}
-      </div>`;
-  }
-
-  function payLabel(p) {
-    return { upi:'UPI', card:'Card', netbanking:'Net Banking', cod:'COD' }[p] || p;
-  }
-
-  // ─── Filter & Search ───────────────────────────────────────────────────────
-  window.filterOrders = function(status, el) {
-    activeFilter = status;
-    document.querySelectorAll('.tab-active').forEach(t => {
-      t.classList.remove('tab-active');
-      t.classList.add('text-gray-500');
-    });
-    el.classList.add('tab-active');
-    el.classList.remove('text-gray-500');
-    applyFilters();
-  };
-
-  window.searchOrders = function(q) {
-    applyFilters(q);
-  };
-
-  function applyFilters(q = document.getElementById('order-search').value) {
-    let filtered = allOrders;
-    if (activeFilter !== 'all') filtered = filtered.filter(o => o.status === activeFilter);
-    if (q.trim()) {
-      const lq = q.toLowerCase();
-      filtered = filtered.filter(o =>
-        o.id.toLowerCase().includes(lq) ||
-        o.items.some(i => i.name.toLowerCase().includes(lq))
-      );
-    }
-    renderOrders(filtered);
-  }
-
-  // ─── Modal ─────────────────────────────────────────────────────────────────
-  window.openModal = function(orderId) {
-    const order = allOrders.find(o => o.id === orderId);
-    if (!order) return;
-    const date = new Date(order.date).toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' });
-    const delivDate = new Date(order.deliveryDate).toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' });
-
-    document.getElementById('modal-body').innerHTML = `
-      <div class="space-y-4">
-        <div class="flex justify-between text-sm">
-          <div><p class="text-gray-400 text-xs">Order ID</p><p class="font-bold">#${order.id}</p></div>
-          <div class="text-right"><p class="text-gray-400 text-xs">Status</p>
-            <span class="status-${order.status} px-2 py-0.5 rounded-full text-xs font-bold">
-              ${order.status.charAt(0).toUpperCase()+order.status.slice(1)}
-            </span>
-          </div>
-        </div>
-        <div class="text-sm"><p class="text-gray-400 text-xs mb-1">Ordered on</p><p class="font-semibold">${date}</p></div>
-
-        <div class="border-t pt-4">
-          <p class="text-xs font-bold text-gray-500 uppercase mb-3">Items</p>
-          <div class="space-y-3">
-            ${order.items.map(item => `
-              <div class="flex items-center gap-3">
-                <img src="${item.image}" class="w-14 h-14 rounded-xl object-cover bg-gray-100"
-                  onerror="this.src='https://via.placeholder.com/56'">
-                <div class="flex-1">
-                  <p class="font-semibold text-sm text-gray-900">${item.name}</p>
-                  ${item.size ? `<p class="text-xs text-gray-500">Size: ${item.size}</p>` : ''}
-                  <p class="text-xs text-gray-500">Qty: ${item.qty}</p>
-                </div>
-                <p class="font-bold text-purple-700 text-sm">₹${(item.price * item.qty).toLocaleString('en-IN')}</p>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-
-        <div class="border-t pt-4">
-          <p class="text-xs font-bold text-gray-500 uppercase mb-2">Delivery Address</p>
-          <p class="text-sm font-semibold text-gray-800">${order.address?.name || ''}</p>
-          <p class="text-sm text-gray-600">${order.address?.addr1 || ''}</p>
-          <p class="text-sm text-gray-600">${order.address?.city || ''}, ${order.address?.state || ''} - ${order.address?.pin || ''}</p>
-        </div>
-
-        <div class="border-t pt-4">
-          <p class="text-xs font-bold text-gray-500 uppercase mb-2">Payment</p>
-          <p class="text-sm font-semibold text-gray-800">${payLabel(order.payment)}</p>
-        </div>
-
-        <div class="border-t pt-4 flex justify-between font-bold text-gray-900">
-          <span>Total Paid</span>
-          <span class="text-purple-700 text-lg">₹${order.total?.toLocaleString('en-IN')}</span>
-        </div>
-
-        <div class="bg-purple-50 rounded-xl p-3 text-sm text-purple-700 flex items-center gap-2">
-          <i class="fas fa-truck"></i>
-          <span>${order.status === 'delivered' ? 'Delivered on ' + delivDate : 'Expected by ' + delivDate}</span>
+          <a href="track_order.html?id=${order.id}" class="text-sm font-bold text-gray-600 border border-gray-200 px-4 py-2 rounded-lg hover:bg-gray-100 transition-all bg-white">
+            <i class="fas fa-truck mr-1"></i> Track Shipmenet
+          </a>
         </div>
       </div>
     `;
-    document.getElementById('modal-overlay').classList.remove('hidden');
-  };
+  }).join('');
+}
 
-  window.closeModal = function(e) {
-    if (e.target.id === 'modal-overlay') document.getElementById('modal-overlay').classList.add('hidden');
-  };
+function trackingBar(status) {
+  const steps = ['confirmed', 'shipped', 'delivered'];
+  const idx = steps.indexOf(status);
+  return `
+    <div class="flex items-center w-full max-w-xl">
+      ${steps.map((s, i) => `
+        <div class="flex items-center ${i < steps.length - 1 ? 'flex-1' : ''}">
+          <div class="flex flex-col items-center relative">
+            <div class="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold z-10 shadow-sm
+              ${i <= idx ? 'bg-purple-600 text-white' : 'bg-gray-200 text-gray-400'}">
+              ${i < idx ? '<i class="fas fa-check text-[9px]"></i>' : i + 1}
+            </div>
+            <p class="text-[11px] mt-1 font-medium ${i <= idx ? 'text-purple-600 font-semibold' : 'text-gray-400'}">
+              ${s.charAt(0).toUpperCase() + s.slice(1)}
+            </p>
+          </div>
+          ${i < steps.length - 1 ? `<div class="flex-1 h-0.5 -mt-4 mx-2 ${i < idx ? 'bg-purple-600' : 'bg-gray-200'}"></div>` : ''}
+        </div>
+      `).join('')}
+    </div>`;
+}
 
-  // ─── Actions ───────────────────────────────────────────────────────────────
-  window.cancelOrder = function(orderId) {
-    if (!confirm('Are you sure you want to cancel this order?')) return;
-    allOrders = allOrders.map(o => o.id === orderId ? { ...o, status: 'cancelled' } : o);
-    localStorage.setItem('shopHubOrders', JSON.stringify(allOrders));
-    applyFilters();
-  };
+function payLabel(p) {
+  return { upi: 'UPI', card: 'Card', netbanking: 'Net Banking', cod: 'COD' }[p] || p;
+}
 
-  window.reorder = function(orderId) {
-    const order = allOrders.find(o => o.id === orderId);
-    if (!order) return;
-    const cart = JSON.parse(localStorage.getItem('myShopCart') || '[]');
-    order.items.forEach(item => {
-      for (let i = 0; i < item.qty; i++) cart.push({ id: item.id || Date.now(), name: item.name, price: item.price, image: item.image, size: item.size });
-    });
-    localStorage.setItem('myShopCart', JSON.stringify(cart));
-    window.location.href = 'cart.html';
-  };
+// ─── Filter & Search Engine ─────────────────────────────────────────────────
+window.filterOrders = function(status, el) {
+  activeFilter = status;
+  document.querySelectorAll('.tab-active').forEach(t => {
+    t.className = "pb-3 text-gray-500 hover:text-purple-600 transition-colors font-medium";
+  });
+  el.className = "pb-3 tab-active text-purple-600 font-bold border-b-2 border-purple-600";
+  applyFilters();
+};
 
-  // ─── Cart Badge ────────────────────────────────────────────────────────────
-  function updateCartBadge() {
-    const cart = JSON.parse(localStorage.getItem('myShopCart') || '[]');
-    document.getElementById('cart-badge').textContent = cart.length;
+window.searchOrders = function(q) {
+  applyFilters(q);
+};
+
+function applyFilters(q = document.getElementById('order-search').value) {
+  let filtered = allOrders;
+  if (activeFilter !== 'all') {
+    filtered = filtered.filter(o => o.status === activeFilter);
   }
+  if (q.trim()) {
+    const lq = q.toLowerCase();
+    filtered = filtered.filter(o =>
+      o.id.toLowerCase().includes(lq) ||
+      o.items.some(i => i.name.toLowerCase().includes(lq))
+    );
+  }
+  renderOrders(filtered);
+}
 
-  // ─── Init ──────────────────────────────────────────────────────────────────
+// ─── Modal Manager ──────────────────────────────────────────────────────────
+window.openModal = function(orderId) {
+  const order = allOrders.find(o => o.id === orderId);
+  if (!order) return;
+  const date = new Date(order.date).toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' });
+  const delivDate = new Date(order.deliveryDate).toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' });
+
+  document.getElementById('modal-body').innerHTML = `
+    <div class="space-y-5">
+      <div class="flex justify-between items-center text-sm bg-gray-50 p-3 rounded-xl">
+        <div>
+          <p class="text-gray-400 text-xs uppercase tracking-wider font-semibold">Order ID</p>
+          <p class="font-bold text-gray-900">#${order.id}</p>
+        </div>
+        <div class="text-right">
+          <p class="text-gray-400 text-xs uppercase tracking-wider font-semibold mb-1">Status</p>
+          <span class="status-${order.status} px-2.5 py-0.5 rounded-full text-xs font-bold">
+            ${order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+          </span>
+        </div>
+      </div>
+      
+      <div class="text-sm px-1">
+        <p class="text-gray-400 text-xs uppercase tracking-wider font-semibold mb-0.5">Ordered on</p>
+        <p class="font-semibold text-gray-800">${date}</p>
+      </div>
+
+      <div class="border-t border-gray-100 pt-4">
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Items Purchased</p>
+        <div class="space-y-3 max-h-48 overflow-y-auto pr-1">
+          ${order.items.map(item => `
+            <div class="flex items-center gap-3 bg-gray-50/50 p-2 rounded-xl border border-gray-100">
+              <img src="${item.image}" class="w-12 h-12 rounded-lg object-cover bg-gray-100 flex-shrink-0"
+                onerror="this.src='https://via.placeholder.com/48'">
+              <div class="flex-1 min-w-0">
+                <p class="font-semibold text-sm text-gray-900 truncate">${item.name}</p>
+                <p class="text-xs text-gray-500 mt-0.5">
+                  ${item.size ? `Size: ${item.size} · ` : ''}Qty: ${item.qty}
+                </p>
+              </div>
+              <p class="font-bold text-purple-700 text-sm flex-shrink-0">₹${(item.price * item.qty).toLocaleString('en-IN')}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <div class="border-t border-gray-100 pt-4 text-sm px-1 space-y-1">
+        <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1.5">Delivery Address</p>
+        <p class="font-bold text-gray-800">${order.address?.name || ''}</p>
+        <p class="text-gray-600 text-xs">${order.address?.addr1 || ''}</p>
+        <p class="text-gray-600 text-xs">${order.address?.city || ''}, ${order.address?.state || ''} - ${order.address?.pin || ''}</p>
+      </div>
+
+      <div class="border-t border-gray-100 pt-4 flex justify-between items-center text-sm px-1">
+        <div>
+          <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-0.5">Payment Method</p>
+          <p class="font-semibold text-gray-800">${payLabel(order.payment)}</p>
+        </div>
+        <div class="text-right">
+          <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-0.5">Total Amount</p>
+          <p class="text-purple-700 text-lg font-extrabold">₹${Number(order.total).toLocaleString('en-IN')}</p>
+        </div>
+      </div>
+
+      <div class="bg-purple-50 rounded-xl p-3.5 text-xs text-purple-700 flex items-center gap-2.5 font-medium shadow-inner">
+        <i class="fas fa-truck text-sm"></i>
+        <span>${order.status === 'delivered' ? 'Delivered safely on ' + delivDate : 'Package is expected to arrive by ' + delivDate}</span>
+      </div>
+    </div>
+  `;
+  document.getElementById('modal-overlay').classList.remove('hidden');
+};
+
+window.closeModal = function(e) {
+  if (e.target.id === 'modal-overlay') {
+    document.getElementById('modal-overlay').classList.add('hidden');
+  }
+};
+
+// ─── Operational Actions ────────────────────────────────────────────────────
+window.cancelOrder = function(orderId) {
+  if (!confirm('Are you sure you want to cancel this order?')) return;
+  allOrders = allOrders.map(o => o.id === orderId ? { ...o, status: 'cancelled' } : o);
+  localStorage.setItem('shopHubOrders', JSON.stringify(allOrders));
+  applyFilters();
+};
+
+window.reorder = function(orderId) {
+  const order = allOrders.find(o => o.id === orderId);
+  if (!order) return;
+  const cart = JSON.parse(localStorage.getItem('myShopCart') || '[]');
+  
+  order.items.forEach(item => {
+    for (let i = 0; i < item.qty; i++) {
+      cart.push({ 
+        id: item.id || Date.now() + Math.random(), 
+        name: item.name, 
+        price: item.price, 
+        image: item.image, 
+        size: item.size 
+      });
+    }
+  });
+  localStorage.setItem('myShopCart', JSON.stringify(cart));
+  window.location.href = 'cart.html';
+};
+
+function updateCartBadge() {
+  const cart = JSON.parse(localStorage.getItem('myShopCart') || '[]');
+  const badge = document.getElementById('cart-badge');
+  if (badge) badge.textContent = cart.length;
+}
+
+// ─── Initialization ─────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
   loadOrders();
   renderOrders(allOrders);
   updateCartBadge();
+});
 </script>
 </body>
 </html>

@@ -1,54 +1,78 @@
-<section class="container mx-auto px-4 py-12 max-w-4xl">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Order | ShopHub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; background-color: #f9fafb; }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center">
+
+  <section class="container mx-auto px-4 py-12 max-w-4xl">
     <div class="bg-white rounded-3xl shadow-sm border p-8">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 border-b pb-6">
-            <div>
-                <h2 class="text-xl font-bold">Order #SH-98765</h2>
-                <p class="text-gray-500 text-sm">Placed on May 12, 2026</p>
+      
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 border-b pb-6">
+        <div>
+          <h2 class="text-xl font-bold text-gray-900">Order #SH-98765</h2>
+          <p class="text-gray-500 text-sm">Placed on May 12, 2026</p>
+        </div>
+        <div class="mt-4 md:mt-0 md:text-right">
+          <span class="bg-green-100 text-green-700 px-4 py-1 rounded-full text-sm font-bold">In Transit</span>
+          <p class="text-gray-400 text-xs mt-1 italic">Est. delivery: May 18</p>
+        </div>
+      </div>
+
+      <div class="relative pl-2 space-y-8">
+        
+        <div class="absolute left-[27px] top-4 bottom-4 w-0.5 bg-gray-200 z-0"></div>
+
+        <div class="flex gap-6 relative z-10 items-start">
+          <div class="flex-shrink-0">
+            <div class="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center ring-8 ring-white">
+              <i class="fas fa-check text-sm"></i>
             </div>
-            <div class="mt-4 md:mt-0 text-right">
-                <span class="bg-green-100 text-green-700 px-4 py-1 rounded-full text-sm font-bold">In Transit</span>
-                <p class="text-gray-400 text-xs mt-1 italic">Est. delivery: May 18</p>
-            </div>
+            <div class="absolute left-[19px] top-10 h-10 w-0.5 bg-purple-600"></div>
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-900">Order Confirmed</h4>
+            <p class="text-sm text-gray-500">Your order has been received and is being processed.</p>
+            <span class="text-xs text-gray-400 font-medium">May 12, 10:30 AM</span>
+          </div>
         </div>
 
-        <div class="relative space-y-8">
-            <div class="flex gap-6 relative">
-                <div class="flex flex-col items-center">
-                    <div class="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center z-10">
-                        <i class="fas fa-check"></i>
-                    </div>
-                    <div class="w-1 h-full bg-purple-600 absolute top-10"></div>
-                </div>
-                <div>
-                    <h4 class="font-bold text-gray-900">Order Confirmed</h4>
-                    <p class="text-sm text-gray-500">Your order has been received and is being processed.</p>
-                    <span class="text-xs text-gray-400">May 12, 10:30 AM</span>
-                </div>
+        <div class="flex gap-6 relative z-10 items-start">
+          <div class="flex-shrink-0">
+            <div class="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center ring-8 ring-white">
+              <i class="fas fa-shipping-fast text-sm"></i>
             </div>
-
-            <div class="flex gap-6 relative">
-                <div class="flex flex-col items-center">
-                    <div class="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center z-10">
-                        <i class="fas fa-shipping-fast"></i>
-                    </div>
-                    <div class="w-1 h-full bg-gray-200 absolute top-10"></div>
-                </div>
-                <div>
-                    <h4 class="font-bold text-gray-900">Shipped</h4>
-                    <p class="text-sm text-gray-500">Package has left our warehouse in Mumbai.</p>
-                    <span class="text-xs text-gray-400">May 14, 02:15 PM</span>
-                </div>
-            </div>
-
-            <div class="flex gap-6">
-                <div class="w-10 h-10 rounded-full bg-gray-100 text-gray-400 flex items-center justify-center z-10">
-                    <i class="fas fa-home"></i>
-                </div>
-                <div>
-                    <h4 class="font-bold text-gray-300">Delivered</h4>
-                    <p class="text-sm text-gray-300">Arrived at your destination.</p>
-                </div>
-            </div>
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-900">Shipped</h4>
+            <p class="text-sm text-gray-500">Package has left our warehouse in Mumbai.</p>
+            <span class="text-xs text-gray-400 font-medium">May 14, 02:15 PM</span>
+          </div>
         </div>
+
+        <div class="flex gap-6 relative z-10 items-start">
+          <div class="flex-shrink-0">
+            <div class="w-10 h-10 rounded-full bg-gray-100 text-gray-400 flex items-center justify-center ring-8 ring-white">
+              <i class="fas fa-home text-sm"></i>
+            </div>
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-300">Delivered</h4>
+            <p class="text-sm text-gray-300">Arrived at your destination.</p>
+          </div>
+        </div>
+
+      </div>
     </div>
-</section>
+  </section>
+
+</body>
+</html>

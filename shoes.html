@@ -211,7 +211,7 @@
                 <span class="icon" id="search-trigger">🔍</span>
             </div>
             
-            <a href="cart.html" class="icon cart-icon" id="cart-link">
+            <a href="cart (1).html" class="icon cart-icon" id="cart-link">
                 🛒 <span class="cart-count" id="cart-count">0</span>
             </a>
         </div>
@@ -469,7 +469,9 @@
                 }
 
                 const priceElement = card.querySelector('.product-price');
-                const priceValue = priceElement.getAttribute('data-price') || "49.99";
+                const priceValue =
+    priceElement.getAttribute('data-price') ||
+    priceElement.innerText.replace('₹', '').trim();
 
                 const product = {
                     id: (card.getAttribute('data-id') || Date.now()) + "-" + selectedSizeBox.innerText,

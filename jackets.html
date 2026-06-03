@@ -217,11 +217,11 @@
         <a href="Men.html" class="logo">Back</a>
         <div class="nav-icons">
             <div class="search-container">
-                <input type="text" id="search-input" placeholder="Search shirts...">
+                <input type="text" id="search-input" placeholder="Search jackets...">
                 <span class="icon" id="search-trigger">🔍</span>
             </div>
             
-            <a href="cart.html" class="icon cart-icon" id="cart-link">
+            <a href="cart (1).html" class="icon cart-icon" id="cart-link">
                 🛒 <span class="cart-count" id="cart-count">0</span>
             </a>
         </div>
@@ -235,7 +235,7 @@
         <div class="product-card" data-id="1">
             <div class="product-image-container">
                 <a href="product_detail.html?id=205">
-                    <img src="Assets/jacket1.jpg" alt="Classic White Shirt" class="product-image">
+                    <img src="Assets/jacket1.jpg" alt="Classic Light Wash Denim Jacket" class="product-image">
                 </a>
                 <div class="hover-overlay">
                     <div class="size-selection">
@@ -254,7 +254,7 @@
         <div class="product-card" data-id="2">
             <div class="product-image-container">
                 <a href="product_detail.html?id=206">
-                    <img src="Assets/jacket10.webp" alt="Light Blue Shirt" class="product-image">
+                    <img src="Assets/jacket10.webp" alt="Navy Lightweight Bomber Jacket" class="product-image">
                 </a>
                 <div class="hover-overlay">
                     <div class="size-selection">
@@ -273,7 +273,7 @@
         <div class="product-card" data-id="3">
             <div class="product-image-container">
                 <a href="product_detail.html?id=207">
-                    <img src="Assets/jacket11.webp" alt="Beige Shirt" class="product-image">
+                    <img src="Assets/jacket11.webp" alt="Textured Varsity Cardigan/Jacket" class="product-image">
                 </a>
                 <div class="hover-overlay">
                     <div class="size-selection">
@@ -291,7 +291,7 @@
         <div class="product-card" data-id="4">
             <div class="product-image-container">
                 <a href="product_detail.html?id=208">
-                    <img src="Assets/jacket12.webp" alt="Navy Blue Shirt" class="product-image">
+                    <img src="Assets/jacket12.webp" alt="Monogram Print Bomber Jacket" class="product-image">
                 </a>
                 <div class="hover-overlay">
                     <div class="size-selection">
@@ -306,10 +306,10 @@
             <p class="product-price" data-price="15000">₹15000</p>
         </div>
 
-        <div class="product-card">
+        <div class="product-card" data-id="5">
             <div class="product-image-container">
                 <a href="product_detail.html?id=209">
-                    <img src="Assets/jacket2.jpg" alt="Beige Shirt" class="product-image">
+                    <img src="Assets/jacket2.jpg" alt="Dark Wash Denim Trucker Jacket" class="product-image">
                 </a>
                 <div class="hover-overlay">
                     <div class="size-selection">
@@ -324,3 +324,84 @@
             </a>
             <p class="product-price">₹2000</p>
         </div>
+    </main>
+
+    <script>
+        // 1. Initialize Cart
+        let cart = JSON.parse(localStorage.getItem('myShopCart')) || [];
+        updateCartDisplay();
+
+        // 2. SEARCH LOGIC
+        const searchTrigger = document.getElementById('search-trigger');
+        const searchInput = document.getElementById('search-input');
+        const productCards = document.querySelectorAll('.product-card');
+
+        // Toggle search bar visibility
+        searchTrigger.addEventListener('click', () => {
+            searchInput.classList.toggle('active');
+            if (searchInput.classList.contains('active')) {
+                searchInput.focus();
+            }
+        });
+
+        // Filter products as user types
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+
+            productCards.forEach(card => {
+                const productName = card.querySelector('.product-name').innerText.toLowerCase();
+                if (productName.includes(query)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+
+        // 3. Handle Size Selection
+        document.querySelectorAll('.size-box').forEach(box => {
+            box.addEventListener('click', function(e) {
+                e.preventDefault();
+                this.parentElement.querySelectorAll('.size-box').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // 4. Handle Add to Cart
+        document.querySelectorAll('.add-cart-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const card = this.closest('.product-card');
+                const selectedSizeBox = card.querySelector('.size-box.selected');
+
+                if (!selectedSizeBox) {
+                    alert('Please select a size first!');
+                    return;
+                }
+
+                const priceElement = card.querySelector('.product-price');
+                const priceValue = priceElement.getAttribute('data-price') ||
+                                   priceElement.innerText.replace('₹', '').trim();
+
+                const product = {
+                    id: (card.getAttribute('data-id') || Date.now()) + "-" + selectedSizeBox.innerText,
+                    name: card.querySelector('.product-name').innerText,
+                    price: priceValue,
+                    image: card.querySelector('.product-image').getAttribute('src'),
+                    size: selectedSizeBox.innerText
+                };
+
+                cart.push(product);
+                localStorage.setItem('myShopCart', JSON.stringify(cart));
+                updateCartDisplay();
+                alert(`${product.name} added to cart!`);
+            });
+        });
+
+        function updateCartDisplay() {
+            const countElement = document.getElementById('cart-count');
+            if(countElement) countElement.innerText = cart.length;
+        }
+    </script>
+</body>
+</html>
