@@ -8,27 +8,21 @@ const jwt = require('jsonwebtoken');
 router.post('/signup', async (req, res) => {
     try {
         const { username, email, password } = req.body;
-
+        
+        // Ensure data is received
         if (!username || !email || !password) {
             return res.status(400).json({ message: "All fields are required" });
         }
 
-        // FIX: The variable 'hashedPassword' must be defined here
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        // Now 'hashedPassword' is defined and safe to use
-        const newUser = new User({
-            username, 
-            email,
-            password: hashedPassword 
-        });
-
+        const newUser = new User({ username, email, password: hashedPassword });
         await newUser.save();
+        
         res.status(201).json({ message: "User registered successfully" });
     } catch (error) {
-        console.error("SIGNUP ERROR:", error.message);
-        res.status(500).json({ message: "Server error during signup" });
+        res.status(500).json({ message: "Server error", error: error.message });
     }
 });
 
