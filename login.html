@@ -22,12 +22,11 @@
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700">Password</label>
-                <input type="password" required class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-purple-500 outline-none" placeholder="••••••••">
+                <input type="password" id="passwordInput" required class="w-full mt-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-purple-500 outline-none" placeholder="••••••••">
             </div>
             <button type="submit" class="w-full bg-purple-600 text-white py-3 rounded-lg font-bold hover:bg-purple-700 transition-all">Login</button>
         </form>
 
-        <!-- ADDED THIS SECTION BELOW -->
         <div class="mt-6 text-center border-t pt-4">
             <p class="text-sm text-gray-600">
                 Don't have an account? 
@@ -36,31 +35,38 @@
         </div>
     </div>
 
-    <script>
-       document.getElementById('loginForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const email = document.getElementById('emailInput').value;
-    const password = document.querySelector('input[type="password"]').value;
+   <script>
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('emailInput').value;
+        const password = document.getElementById('passwordInput').value;
 
-    // Retrieve the stored user data
-    const storedUser = localStorage.getItem(email);
+        try {
+            const response = await fetch('http://localhost:5000/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
 
-    if (storedUser) {
-        const userData = JSON.parse(storedUser);
+            const data = await response.json();
 
-        // Check if the password matches
-        if (userData.password === password) {
-            localStorage.setItem('userName', userData.name);
-            localStorage.setItem('isLoggedIn', 'true');
-            window.location.href = 'home.html';
-        } else {
-            alert("Invalid password. Please try again.");
+            if (response.ok) {
+                // Save essential auth data
+                localStorage.setItem('userId', data.user.id);
+                localStorage.setItem('userName', data.user.username);
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('isLoggedIn', 'true');
+                
+                alert("Login successful!");
+                window.location.href = 'home.html';
+            } else {
+                alert("Login Failed: " + data.message);
+            }
+        } catch (error) {
+            alert("Could not connect to server.");
         }
-    } else {
-        alert("No account found with this email. Please sign up.");
-    }
-});
-    </script>
+    });
+</script>
 </body>
 </html>

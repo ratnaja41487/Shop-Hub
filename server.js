@@ -1,31 +1,26 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
 require('dotenv').config();
 
-const authRoutes = require('./routes/auth'); // Adjust path to your auth.js file if necessary
-
 const app = express();
-
-// Middleware to parse incoming JSON request bodies
+app.use(cors());
 app.use(express.json());
 
-// Mount Authentication Routes
-app.use('/api/auth', authRoutes);
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/orders', require('./routes/orders'));
 
-// Establish database connection with robust error catching options
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("Successfully connected to MongoDB Atlas!"))
-    .catch((err) => {
-        console.error("MongoDB initial connection error:", err.message);
-    });
-
-// Fallback error-catching middleware
-app.use((err, req, res, next) => {
-    console.error("Unhandled Exception:", err.stack);
-    res.status(500).send({ message: "Something went wrong on the server side." });
-});
+const connectToDatabase = async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URI, { serverSelectionTimeoutMS: 5000 });
+        console.log("✅ SUCCESS: Connected to MongoDB Atlas!");
+    } catch (err) {
+        console.error("❌ MONGODB CONNECTION ERROR:", err.message);
+        process.exit(1);
+    }
+};
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+connectToDatabase().then(() => {
+    app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 });

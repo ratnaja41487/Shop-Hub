@@ -1,82 +1,51 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User'); // Adjust if your User model is in a different folder
+const User = require('../models/User');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// ==========================================
-// 1. SIGNUP ROUTE (Keep your original signup code here)
-// ==========================================
+// SIGNUP
 router.post('/signup', async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
-        let userExists = await User.findOne({ email });
-        if (userExists) {
-            return res.status(400).json({ message: "User already exists with this email" });
+        if (!username || !email || !password) {
+            return res.status(400).json({ message: "All fields are required" });
         }
 
-        const newUser = new User({ username, email, password });
-        await newUser.save();
+        // FIX: The variable 'hashedPassword' must be defined here
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
-        const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-
-        res.status(201).json({
-            message: "User registered successfully!",
-            token,
-            user: { id: newUser._id, username: newUser.username, email: newUser.email }
+        // Now 'hashedPassword' is defined and safe to use
+        const newUser = new User({
+            username, 
+            email,
+            password: hashedPassword 
         });
+
+        await newUser.save();
+        res.status(201).json({ message: "User registered successfully" });
     } catch (error) {
-        console.error("CRITICAL ERROR IN SIGNUP ROUTE:", error.message);
-        res.status(500).json({ message: "Internal Server Error during signup", error: error.message });
+        console.error("SIGNUP ERROR:", error.message);
+        res.status(500).json({ message: "Server error during signup" });
     }
 });
 
-// ==========================================
-// 2. LOGIN ROUTE 
-// ==========================================
+// LOGIN
 router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
-
-        // Check if the user exists
         const user = await User.findOne({ email });
-        if (!user) {
-            return res.status(400).json({ message: "Invalid Email or Password" });
+        
+        if (!user || !(await bcrypt.compare(password, user.password))) {
+            return res.status(400).json({ message: "Invalid credentials" });
         }
-
-        // Verify the password 
-        if (user.password !== password) {
-            return res.status(400).json({ message: "Invalid Email or Password" });
-        }
-
-        // Generate a JWT Token
-        const token = jwt.sign(
-            { id: user._id }, 
-            process.env.JWT_SECRET, 
-            { expiresIn: '1h' }
-        );
-
-        // Send Success Response
-        res.status(200).json({
-            message: "Login successful!",
-            token,
-            user: {
-                id: user._id,
-                username: user.username,
-                email: user.email
-            }
-        });
-
-    } catch (error) {
-        console.error("CRITICAL ERROR IN LOGIN ROUTE:", error.message);
-        res.status(500).json({ 
-            message: "Internal Server Error during login", 
-            error: error.message 
-        });
+        
+        res.status(200).json({ message: "Login successful", user: { username: user.username, email: user.email } });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
 });
 
-// ==========================================
-// 3. EXPORT THE ROUTER
-// ==========================================
 module.exports = router;
