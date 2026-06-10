@@ -317,6 +317,7 @@
                         btn.classList.add('selected');
                         selectedSize = sz;
                         document.getElementById('size-error').style.display = 'none';
+                        updateAddToCartBtn();
                     };
                     sizesEl.appendChild(btn);
                 });
@@ -327,6 +328,7 @@
 
             // Wishlist state
             updateWishlistBtn();
+            updateAddToCartBtn();
         }
 
         // ─── Related Products ─────────────────────────────────────────────────
@@ -356,12 +358,41 @@
         }
 
         // ─── Cart ─────────────────────────────────────────────────────────────
+        function isInCart() {
+            const p = currentProduct;
+            if (!p) return false;
+            const itemId = p.id + (selectedSize ? '-' + selectedSize : '');
+            return cart.some(c => c.id === itemId);
+        }
+
+        function updateAddToCartBtn() {
+            const btn = document.getElementById('add-to-cart-btn');
+            if (!btn) return;
+            if (isInCart()) {
+                btn.innerHTML = '<i class="fas fa-check" style="margin-right:8px;"></i> Added to Cart';
+                btn.disabled = true;
+                btn.style.background = '#6b7280';
+                btn.style.boxShadow = 'none';
+                btn.style.cursor = 'not-allowed';
+            } else {
+                btn.innerHTML = '<i class="fas fa-shopping-bag" style="margin-right:8px;"></i> Add to Cart';
+                btn.disabled = false;
+                btn.style.background = '';
+                btn.style.boxShadow = '';
+                btn.style.cursor = '';
+            }
+        }
+
         function addToCart() {
             const p = currentProduct;
             if (!p) return;
             if (!selectedSize && p.sizes && p.sizes.length > 0) {
                 document.getElementById('size-error').style.display = 'block';
                 document.getElementById('size-buttons').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+            if (isInCart()) {
+                showToast('Already in cart!', '');
                 return;
             }
             const item = {
@@ -375,6 +406,7 @@
             cart.push(item);
             localStorage.setItem('myShopCart', JSON.stringify(cart));
             updateCartBadge();
+            updateAddToCartBtn();
             showToast('Added to cart!', 'success');
         }
 

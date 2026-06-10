@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Categories - ShopHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f9fafb; }
+        .cat-card { transition: transform 0.2s, box-shadow 0.2s; }
+        .cat-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(124,58,237,0.15); }
+        .cat-card img { transition: transform 0.4s; }
+        .cat-card:hover img { transform: scale(1.07); }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar (same as home.html) -->
+    <header class="bg-white border-b sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <h1 class="text-2xl font-bold text-purple-700 flex items-center gap-2">
+                    <a href="home.html"><i class="fas fa-shopping-bag"></i> ShopHub</a>
+                </h1>
+            </div>
+            <div class="flex items-center gap-6 text-sm font-medium text-gray-700">
+                <a href="become_a_vendor.html" class="hover:text-purple-600">Become a Vendor</a>
+                <a href="order_history.html" class="hover:text-purple-600">Track Order</a>
+                <a href="wishlist.html"><i class="fas fa-heart text-xl"></i></a>
+                <a href="cart (1).html" class="relative group">
+                    <i class="fas fa-shopping-cart text-xl group-hover:text-purple-600 transition-colors"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-purple-600 text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center">0</span>
+                </a>
+                <a href="login.html" class="hover:text-purple-600">Login</a>
+                <a href="signup.html" class="hover:text-purple-600">Sign Up</a>
+            </div>
+        </div>
+        <nav class="bg-white border-t">
+            <div class="container mx-auto px-4 flex items-center gap-8 py-2 text-sm font-semibold">
+                <div class="flex gap-6 text-gray-600">
+                    <a href="home.html" class="hover:text-purple-600">Home</a>
+                    <a href="Men.html" class="hover:text-purple-600">Men</a>
+                    <a href="women.html" class="hover:text-purple-600">Women</a>
+                    <a href="kids.html" class="hover:text-purple-600">Kids</a>
+                    <a href="Electronic.html" class="hover:text-purple-600">Electronic Appliances</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <div class="bg-gradient-to-r from-purple-50 to-purple-100 py-10 px-4 text-center">
+        <h2 class="text-3xl font-bold text-purple-700 mb-2">All Categories</h2>
+        <p class="text-gray-500 text-sm">Browse everything we have to offer</p>
+    </div>
+
+    <!-- Main Categories -->
+    <div class="container mx-auto px-4 py-10">
+
+        <h3 class="text-xl font-bold text-gray-700 mb-6">Shop by Department</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+
+            <a href="Men.html" class="cat-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 block">
+                <div class="overflow-hidden h-48">
+                    <img src="Assets/men_photo.jpg" alt="Men" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <h4 class="font-bold text-gray-800 text-lg">Men</h4>
+                    <p class="text-sm text-gray-400 mt-1">Shirts, Pants, Shoes & more</p>
+                    <span class="inline-block mt-3 text-purple-600 text-sm font-semibold">Shop Now →</span>
+                </div>
+            </a>
+
+            <a href="women.html" class="cat-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 block">
+                <div class="overflow-hidden h-48">
+                    <img src="Assets/jewellery_main.webp" alt="Women" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <h4 class="font-bold text-gray-800 text-lg">Women</h4>
+                    <p class="text-sm text-gray-400 mt-1">Dresses, Jewellery, Sandals & more</p>
+                    <span class="inline-block mt-3 text-purple-600 text-sm font-semibold">Shop Now →</span>
+                </div>
+            </a>
+
+            <a href="kids.html" class="cat-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 block">
+                <div class="overflow-hidden h-48">
+                    <img src="Assets/kids_main.jpg" alt="Kids" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <h4 class="font-bold text-gray-800 text-lg">Kids</h4>
+                    <p class="text-sm text-gray-400 mt-1">Boys, Girls, Toys & more</p>
+                    <span class="inline-block mt-3 text-purple-600 text-sm font-semibold">Shop Now →</span>
+                </div>
+            </a>
+
+            <a href="Electronic.html" class="cat-card bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 block">
+                <div class="overflow-hidden h-48">
+                    <img src="Assets/electronic_main.webp" alt="Electronics" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <h4 class="font-bold text-gray-800 text-lg">Electronics</h4>
+                    <p class="text-sm text-gray-400 mt-1">Mobiles, Laptops, TVs & more</p>
+                    <span class="inline-block mt-3 text-purple-600 text-sm font-semibold">Shop Now →</span>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- Sub Categories -->
+        <h3 class="text-xl font-bold text-gray-700 mb-6">Browse by Sub-Category</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+
+            <a href="shirts.html" class="cat-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 block text-center p-4">
+                <div class="overflow-hidden h-28 rounded-lg mb-3">
+                    <img src="Assets/main_shiet.png" alt="Shirts" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-gray-700 text-sm">Shirts</p>
+            </a>
+
+            <a href="pant.html" class="cat-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 block text-center p-4">
+                <div class="overflow-hidden h-28 rounded-lg mb-3">
+                    <img src="Assets/main_pants.webp" alt="Pants" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-gray-700 text-sm">Pants</p>
+            </a>
+
+            <a href="jackets.html" class="cat-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 block text-center p-4">
+                <div class="overflow-hidden h-28 rounded-lg mb-3">
+                    <img src="Assets/main_jackets.jpg" alt="Jackets" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-gray-700 text-sm">Jackets</p>
+            </a>
+
+            <a href="shoes.html" class="cat-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 block text-center p-4">
+                <div class="overflow-hidden h-28 rounded-lg mb-3">
+                    <img src="Assets/main_shoes2.webp" alt="Shoes" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-gray-700 text-sm">Shoes</p>
+            </a>
+
+            <a href="Traditionaldress.html" class="cat-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 block text-center p-4">
+                <div class="overflow-hidden h-28 rounded-lg mb-3">
+                    <img src="Assets/jewellery_main.webp" alt="Traditional" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-gray-700 text-sm">Traditional</p>
+            </a>
+
+            <a href="westrendress.html" class="cat-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 block text-center p-4">
+                <div class="overflow-hidden h-28 rounded-lg mb-3">
+                    <img src="Assets/sandles_main.webp" alt="Western" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-gray-700 text-sm">Western Dress</p>
+            </a>
+
+            <a href="Jewellery.html" class="cat-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 block text-center p-4">
+                <div class="overflow-hidden h-28 rounded-lg mb-3">
+                    <img src="Assets/jewellery_main.webp" alt="Jewellery" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-gray-700 text-sm">Jewellery</p>
+            </a>
+
+            <a href="Sandles.html" class="cat-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 block text-center p-4">
+                <div class="overflow-hidden h-28 rounded-lg mb-3">
+                    <img src="Assets/sandles_main.webp" alt="Sandals" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-gray-700 text-sm">Sandals</p>
+            </a>
+
+            <a href="boys.html" class="cat-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 block text-center p-4">
+                <div class="overflow-hidden h-28 rounded-lg mb-3">
+                    <img src="Assets/kids_main.jpg" alt="Boys" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-gray-700 text-sm">Boys</p>
+            </a>
+
+            <a href="girls.html" class="cat-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 block text-center p-4">
+                <div class="overflow-hidden h-28 rounded-lg mb-3">
+                    <img src="Assets/kids_main.jpg" alt="Girls" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-gray-700 text-sm">Girls</p>
+            </a>
+
+            <a href="toys.html" class="cat-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 block text-center p-4">
+                <div class="overflow-hidden h-28 rounded-lg mb-3">
+                    <img src="Assets/toys_main.jpg" alt="Toys" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-gray-700 text-sm">Toys</p>
+            </a>
+
+            <a href="mobile.html" class="cat-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 block text-center p-4">
+                <div class="overflow-hidden h-28 rounded-lg mb-3">
+                    <img src="Assets/mobile_main.jpg" alt="Mobiles" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-gray-700 text-sm">Mobiles</p>
+            </a>
+
+            <a href="laptop.html" class="cat-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 block text-center p-4">
+                <div class="overflow-hidden h-28 rounded-lg mb-3">
+                    <img src="Assets/laptop_main.webp" alt="Laptops" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-gray-700 text-sm">Laptops</p>
+            </a>
+
+            <a href="tv.html" class="cat-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 block text-center p-4">
+                <div class="overflow-hidden h-28 rounded-lg mb-3">
+                    <img src="Assets/tv_main.webp" alt="TVs" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-gray-700 text-sm">TVs</p>
+            </a>
+
+            <a href="earpods.html" class="cat-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 block text-center p-4">
+                <div class="overflow-hidden h-28 rounded-lg mb-3">
+                    <img src="Assets/earpods_main.jpg" alt="Earpods" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-gray-700 text-sm">Earpods</p>
+            </a>
+
+            <a href="watches.html" class="cat-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 block text-center p-4">
+                <div class="overflow-hidden h-28 rounded-lg mb-3">
+                    <img src="Assets/watch_main.jpg" alt="Watches" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-gray-700 text-sm">Watches</p>
+            </a>
+
+            <a href="fridge.html" class="cat-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 block text-center p-4">
+                <div class="overflow-hidden h-28 rounded-lg mb-3">
+                    <img src="Assets/fridge_main.webp" alt="Fridges" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-gray-700 text-sm">Fridges</p>
+            </a>
+
+            <a href="casuals.html" class="cat-card bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 block text-center p-4">
+                <div class="overflow-hidden h-28 rounded-lg mb-3">
+                    <img src="Assets/main_jackets.jpg" alt="Casuals" class="w-full h-full object-cover">
+                </div>
+                <p class="font-semibold text-gray-700 text-sm">Casuals</p>
+            </a>
+
+        </div>
+    </div>
+
+    <script>
+        const cart = JSON.parse(localStorage.getItem('myShopCart')) || [];
+        document.getElementById('cart-count').textContent = cart.length;
+    </script>
+
+</body>
+</html>
