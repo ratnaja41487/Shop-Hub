@@ -30,16 +30,7 @@ const orderRoutes = require('./routes/orders');
 
 app.use('/api/orders', orderRoutes);
 // Ensure this part is actually executing
-app.post('/api/orders/add', async (req, res) => {
-    try {
-        const newOrder = new Order(req.body); // 'Order' is your Mongoose Model
-        await newOrder.save(); // This is the line that actually writes to MongoDB
-        res.status(201).json({ message: "Successfully saved to MongoDB!" });
-    } catch (error) {
-        console.error(error); // If it fails, the error will show here in VS Code
-        res.status(500).json({ error: "Failed to save" });
-    }
-});
+
 // Add this route to your server.js
 app.get('/api/orders', async (req, res) => {
     try {
@@ -61,5 +52,25 @@ app.post('/api/products/add', async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Failed to save product" });
+    }
+});
+
+app.post('/api/orders/add', async (req, res) => {
+    try {
+        const orderData = {
+            ...req.body,
+            totalAmount: Number(req.body.totalAmount), // Force conversion
+            items: req.body.items.map(item => ({
+                ...item,
+                price: Number(item.price),
+                quantity: Number(item.quantity)
+            }))
+        };
+        const newOrder = new Order(orderData);
+        await newOrder.save();
+        res.status(201).json({ message: "Success" });
+    } catch (err) {
+        console.error("Mongoose Validation Error:", err.errors); // Check this in terminal!
+        res.status(400).json({ error: err.message });
     }
 });
