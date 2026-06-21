@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Product | ShopHub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 min-h-screen p-8">
+
+    <div class="max-w-5xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8">Add New Product</h1>
+        
+        <form id="productForm" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border">
+                    <label class="block font-semibold mb-2">Product Title</label>
+                    <input type="text" id="title" required class="w-full border p-3 rounded-lg" placeholder="e.g. Men's Cotton Shirt">
+                    
+                    <label class="block font-semibold mt-4 mb-2">Category</label>
+                    <select id="category" class="w-full border p-3 rounded-lg">
+                        <option>Electronics</option>
+                        <option>Men's</option>
+                        <option>Women's</option>
+                        <option>Kid's</option>
+                    </select>
+
+                    <label class="block font-semibold mt-4 mb-2">Price ($)</label>
+                    <input type="number" id="price" required class="w-full border p-3 rounded-lg" placeholder="0.00">
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border space-y-6">
+                <label class="block font-semibold mb-2">Product Images</label>
+                <div class="border-2 border-dashed border-gray-300 rounded-lg p-10 text-center">
+                    <input type="file" id="imageInput" accept="image/*" class="hidden">
+                    <button type="button" onclick="document.getElementById('imageInput').click()" class="text-purple-600 font-bold">
+                        <i class="fas fa-cloud-upload-alt text-4xl block mb-2 text-gray-400"></i>
+                        Click to Upload Image
+                    </button>
+                    <p id="fileName" class="text-sm text-gray-500 mt-2"></p>
+                </div>
+                
+                <button type="submit" class="w-full bg-purple-600 text-white py-4 rounded-lg font-bold hover:bg-purple-700">
+                    Publish Product
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('imageInput').addEventListener('change', function() {
+            if(this.files.length > 0) document.getElementById('fileName').innerText = this.files[0].name;
+        });
+
+        document.getElementById('productForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const fileInput = document.getElementById('imageInput');
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                const newProduct = {
+                    title: document.getElementById('title').value,
+                    category: document.getElementById('category').value,
+                    price: document.getElementById('price').value,
+                    image: e.target.result // Base64 image data
+                };
+
+                const products = JSON.parse(localStorage.getItem('myProducts') || '[]');
+                products.push(newProduct);
+                localStorage.setItem('myProducts', JSON.stringify(products));
+
+                alert("Product published!");
+                window.location.href = "vendor_dashboard.html";
+            };
+
+            reader.readAsDataURL(fileInput.files[0]);
+        });
+    </script>
+</body>
+</html>

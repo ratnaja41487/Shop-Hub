@@ -1,28 +1,36 @@
 const express = require('express');
 const router = express.Router();
-const Order = require('../models/Order');
+const Order = require('../models/order');
 
-// Endpoint to place an order: POST http://localhost:5000/api/orders/create
-router.post('/create', async (req, res) => {
+// 1. POST: Save a new order
+router.post('/add', async (req, res) => {
     try {
-        const { userId, items, totalAmount, shippingAddress } = req.body;
-
-        if (!userId || !items || items.length === 0 || !totalAmount || !shippingAddress) {
-            return res.status(400).json({ message: "Missing required order fields" });
-        }
-
-        const newOrder = new Order({
-            userId,
-            items,
-            totalAmount,
-            shippingAddress
-        });
-
+        const newOrder = new Order(req.body);
         await newOrder.save();
-        res.status(201).json({ message: "Order saved to MongoDB!", orderId: newOrder._id });
-
+        res.status(201).json({ message: "Order saved successfully!" });
     } catch (error) {
-        res.status(500).json({ message: "Server error creating order", error: error.message });
+        res.status(500).json({ error: "Failed to save order" });
+    }
+});
+
+// 2. GET: Fetch all orders for a specific user (for 'My Orders' page)
+router.get('/user/:userId', async (req, res) => {
+    try {
+        const orders = await Order.find({ userId: req.params.userId }).sort({ createdAt: -1 });
+        res.json(orders);
+    } catch (error) {
+        res.status(500).json({ error: "Could not fetch orders" });
+    }
+});
+
+// 3. GET: Fetch a single order by ID (for 'Track Order' page)
+router.get('/:id', async (req, res) => {
+    try {
+        const order = await Order.findById(req.params.id);
+        if (!order) return res.status(404).json({ message: "Order not found" });
+        res.json(order);
+    } catch (error) {
+        res.status(500).json({ error: "Server error" });
     }
 });
 
