@@ -51,6 +51,11 @@
                 <i class="fa-solid fa-magnifying-glass cursor-pointer" id="search-icon"></i>
             </div>
 
+            <a href="wishlist.html" class="relative cursor-pointer">
+                <i class="fa-regular fa-heart"></i>
+                <span id="wishlist-count" class="absolute -top-2 -right-6 bg-black text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center" style="display: none;">0</span>
+            </a>
+
             <a href="cart.html" class="relative cursor-pointer">
                 <i class="fa-solid fa-bag-shopping"></i>
                 <span id="cart-count" class="absolute -top-2 -right-2 bg-black text-white text-[10px] rounded-full h-4 w-4 flex items-center justify-center" style="display: none;">0</span>
@@ -148,56 +153,128 @@
 </section>
 
     <script>
+        /*
+         * Unified Cart & Wishlist helpers
+         * - Cart stored under 'myShopCart'
+         * - Wishlist stored under 'myWishlist'
+         * Behaviours are defensive so pages without products still work.
+         */
+
+        const cartKey = 'myShopCart';
+        const wishlistKey = 'myWishlist';
+
         const cartBadge = document.getElementById('cart-count');
+        const wishlistBadge = document.getElementById('wishlist-count');
         const searchIcon = document.getElementById('search-icon');
         const searchInput = document.getElementById('search-input');
 
-        // --- 1. SEARCH FUNCTIONALITY ---
-        searchIcon.addEventListener('click', () => {
-            searchInput.focus();
-            searchInput.classList.toggle('w-0');
-            searchInput.classList.toggle('opacity-0');
-            searchInput.classList.toggle('w-40');
-            searchInput.classList.toggle('opacity-100');
-        });
-
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
-            document.querySelectorAll('.category-card').forEach(card => {
-                const name = card.getAttribute('data-name').toLowerCase();
-                card.style.display = name.includes(query) ? "block" : "none";
+        // SEARCH
+        if (searchIcon && searchInput) {
+            searchIcon.addEventListener('click', () => {
+                searchInput.focus();
+                searchInput.classList.toggle('w-0');
+                searchInput.classList.toggle('opacity-0');
+                searchInput.classList.toggle('w-40');
+                searchInput.classList.toggle('opacity-100');
             });
-        });
 
-        // --- 2. CART LOGIC ---
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase();
+                document.querySelectorAll('.category-card').forEach(card => {
+                    const name = (card.getAttribute('data-name') || '').toLowerCase();
+                    card.style.display = name.includes(query) ? "block" : "none";
+                });
+            });
+        }
+
+        // Storage helpers
+        function readJSON(key) {
+            try { return JSON.parse(localStorage.getItem(key)) || []; } catch (e) { return []; }
+        }
+        function writeJSON(key, val) { localStorage.setItem(key, JSON.stringify(val || [])); }
+
+        // Cart helpers
+        function getCart() { return readJSON(cartKey); }
+        function setCart(c) { writeJSON(cartKey, c); updateCartDisplay(); }
+
         function updateCartDisplay() {
-            let cart = JSON.parse(localStorage.getItem('myShopCart')) || [];
+            const cart = getCart();
             if (cartBadge) {
                 cartBadge.textContent = cart.length;
                 cartBadge.style.display = cart.length > 0 ? 'flex' : 'none';
             }
         }
 
-        // FIXED: Only add to cart when clicking actual shop buttons, NOT category links
-        function handleCartAdd(event) {
-            let cart = JSON.parse(localStorage.getItem('myShopCart')) || [];
-            const product = {
-                name: "Sale Item",
-                price: "1200",
-                image: "https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&q=80&w=200"
-            };
-            cart.push(product);
-            localStorage.setItem('myShopCart', JSON.stringify(cart));
-            updateCartDisplay();
-            alert("Added Sale Item to Cart!");
+        // Wishlist helpers
+        function getWishlist() { return readJSON(wishlistKey); }
+        function setWishlist(w) { writeJSON(wishlistKey, w); updateWishlistDisplay(); }
+
+        function updateWishlistDisplay() {
+            const wishlist = getWishlist();
+            if (wishlistBadge) {
+                wishlistBadge.textContent = wishlist.length;
+                wishlistBadge.style.display = wishlist.length > 0 ? 'flex' : 'none';
+            }
         }
 
-        // Only attach the add function to the SHOP buttons
-        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-            btn.addEventListener('click', handleCartAdd);
-        });
+        // Generic product extractor: works for product-card or falls back to defaults
+        function buildProductFromElement(el) {
+            const card = el ? el.closest('.product-card') : null;
+            if (!card) {
+                return {
+                    id: 'sale-item',
+                    name: 'Sale Item',
+                    price: '1200',
+                    image: 'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&q=80&w=200'
+                };
+            }
 
+            return {
+                id: card.getAttribute('data-id') || (card.querySelector('.product-link')?.getAttribute('href') || Date.now().toString()),
+                name: card.querySelector('.product-name')?.innerText?.trim() || 'Product',
+                price: card.querySelector('[data-price]')?.getAttribute('data-price') || card.querySelector('.product-price')?.innerText || '0',
+                image: card.querySelector('.product-image')?.getAttribute('src') || ''
+            };
+        }
+
+        // Cart action: adds product object to cart
+        function handleCartAdd(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const product = buildProductFromElement(this);
+            const cart = getCart();
+            cart.push(product);
+            setCart(cart);
+            alert(`${product.name} added to cart!`);
+        }
+
+        // Wishlist toggle
+        function handleWishlistToggle(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const product = buildProductFromElement(this);
+            const wishlist = getWishlist();
+            const idx = wishlist.findIndex(p => p.id === product.id);
+            if (idx === -1) {
+                wishlist.push(product);
+                setWishlist(wishlist);
+                this.classList?.add('in-wishlist');
+                alert(`${product.name} added to wishlist`);
+            } else {
+                wishlist.splice(idx, 1);
+                setWishlist(wishlist);
+                this.classList?.remove('in-wishlist');
+                alert(`${product.name} removed from wishlist`);
+            }
+        }
+
+        // Attach handlers to existing elements on the page
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => btn.addEventListener('click', handleCartAdd));
+        document.querySelectorAll('.add-wishlist-btn').forEach(btn => btn.addEventListener('click', handleWishlistToggle));
+
+        // Initialize badges
         updateCartDisplay();
+        updateWishlistDisplay();
     </script>
 </body>
 </html>s

@@ -101,14 +101,16 @@
     <div class="success-card bg-white rounded-3xl p-10 max-w-sm text-center">
       <h2 class="text-2xl font-extrabold text-gray-900 mb-2">Order Placed!</h2>
       <p>Thank you for shopping with ShopHub 🎉</p>
-      <a href="home.html" class="block mt-6 bg-purple-600 text-white py-3 rounded-xl font-bold">Continue Shopping</a>
+      <div class="mt-6 space-y-3">
+        <a id="continue-shopping-btn" href="home.html" class="block bg-purple-600 text-white py-3 rounded-xl font-bold">Continue Shopping</a>
+        <a id="track-order-btn" href="#" class="hidden block bg-white border border-purple-600 text-purple-600 py-3 rounded-xl font-bold">Track Order</a>
+      </div>
     </div>
   </div>
 
   <script>
     let cart = JSON.parse(localStorage.getItem('myShopCart')) || [];
     let selectedPaymentMethod = 'upi';
-    let addressData = {};
 
     function groupCart(cart) {
       const groups = {};
@@ -122,12 +124,12 @@
 
     function calcTotals(groups) {
       const subtotal = groups.reduce((s, g) => s + parseFloat(g.price) * g.qty, 0);
-      return { subtotal, total: subtotal }; // Simplified for demo
+      return { subtotal, total: subtotal };
     }
 
     function goToStep(n) {
       [1, 2, 3].forEach(i => document.getElementById(`panel-${i}`).classList.toggle('hidden', i !== n));
-      if(n === 3) populateReview();
+      if (n === 3) populateReview();
     }
 
     function selectPayment(el, method) {
@@ -145,7 +147,14 @@
     async function placeOrder() {
       const groups = groupCart(cart);
       const { total } = calcTotals(groups);
-      
+      const firstName = document.getElementById('fname').value.trim();
+      const lastName = document.getElementById('lname').value.trim();
+      const addr1 = document.getElementById('addr1').value.trim();
+      const city = document.getElementById('city').value.trim();
+      const state = document.getElementById('state').value.trim();
+      const pin = document.getElementById('pin').value.trim();
+
+      const shippingAddress = `${addr1}, ${city}, ${state}, PIN: ${pin}`;
       const orderPayload = {
         items: groups.map(g => ({
           productName: g.name,
@@ -153,7 +162,7 @@
           quantity: g.qty
         })),
         totalAmount: total,
-        shippingAddress: `${document.getElementById('addr1').value}, ${document.getElementById('city').value}`
+        shippingAddress
       };
 
       try {
@@ -163,11 +172,36 @@
           body: JSON.stringify(orderPayload)
         });
 
+        const data = await response.json();
         if (response.ok) {
+          const orderId = data.id || `SH${Date.now()}`;
+          const order = {
+            id: orderId,
+            date: new Date().toISOString(),
+            items: groups.map(g => ({ ...g, qty: g.qty })),
+            address: {
+              name: `${firstName} ${lastName}`.trim(),
+              addr1,
+              city,
+              state,
+              pin
+            },
+            payment: selectedPaymentMethod,
+            total,
+            status: 'confirmed',
+            deliveryDate: new Date(Date.now() + 7 * 86400000).toISOString()
+          };
+
+          const existingOrders = JSON.parse(localStorage.getItem('shopHubOrders') || '[]');
+          existingOrders.unshift(order);
+          localStorage.setItem('shopHubOrders', JSON.stringify(existingOrders));
+
           localStorage.removeItem('myShopCart');
+          document.getElementById('track-order-btn').href = `track_order.html?id=${orderId}`;
+          document.getElementById('track-order-btn').classList.remove('hidden');
           document.getElementById('success-overlay').classList.add('show');
         } else {
-          alert('Failed to place order. Please try again.');
+          alert(`Failed to place order. ${data.error || 'Please try again.'}`);
         }
       } catch (err) {
         console.error('Error:', err);

@@ -69,35 +69,63 @@
   </section>
 
   <script>
+    function findLocalOrder(orderId) {
+      try {
+        const orders = JSON.parse(localStorage.getItem('shopHubOrders') || '[]');
+        return orders.find(order => order.id === orderId || order._id === orderId);
+      } catch (err) {
+        console.error('Failed to parse local orders:', err);
+        return null;
+      }
+    }
+
+    function showOrderNotFound() {
+      document.getElementById('order-id').textContent = 'Order not found';
+      document.getElementById('order-date').textContent = '';
+      document.getElementById('order-status-badge').textContent = 'Unknown';
+    }
+
     async function fetchOrder() {
       const urlParams = new URLSearchParams(window.location.search);
       const orderId = urlParams.get('id');
 
-      if (!orderId) return;
-
-      try {
-        const response = await fetch(`/orders/${orderId}`);
-        const order = await response.json();
-
-        // Populate basic info
-        document.getElementById('order-id').textContent = `Order #${order._id.slice(-6).toUpperCase()}`;
-        document.getElementById('order-date').textContent = `Placed on ${new Date(order.createdAt).toLocaleDateString()}`;
-        document.getElementById('order-status-badge').textContent = order.status;
-
-        // Logic to highlight active steps
-        const steps = ['confirmed', 'shipped', 'delivered'];
-        const activeIdx = steps.indexOf(order.status);
-
-        steps.forEach((step, index) => {
-          const el = document.getElementById(`step-${step}`);
-          if (index <= activeIdx) {
-            el.classList.replace('bg-gray-200', 'bg-purple-600');
-            el.classList.replace('text-gray-400', 'text-white');
-          }
-        });
-      } catch (err) {
-        console.error("Failed to fetch order:", err);
+      if (!orderId) {
+        showOrderNotFound();
+        return;
       }
+
+      let order = findLocalOrder(orderId);
+      if (!order) {
+        const apiBase = window.location.protocol.startsWith('http') ? window.location.origin : 'http://localhost:5000';
+        try {
+          const response = await fetch(`${apiBase}/api/orders/${orderId}`);
+          if (response.ok) {
+            order = await response.json();
+          }
+        } catch (err) {
+          console.warn('Server lookup failed, falling back to local storage:', err);
+        }
+      }
+
+      if (!order) {
+        showOrderNotFound();
+        return;
+      }
+
+      document.getElementById('order-id').textContent = `Order #${(order._id || order.id || '').toString().slice(-6).toUpperCase()}`;
+      document.getElementById('order-date').textContent = `Placed on ${new Date(order.createdAt || order.date || Date.now()).toLocaleDateString()}`;
+      document.getElementById('order-status-badge').textContent = order.status || 'confirmed';
+
+      const steps = ['confirmed', 'shipped', 'delivered'];
+      const activeIdx = steps.indexOf((order.status || 'confirmed').toLowerCase());
+
+      steps.forEach((step, index) => {
+        const el = document.getElementById(`step-${step}`);
+        if (el && index <= activeIdx) {
+          el.classList.replace('bg-gray-200', 'bg-purple-600');
+          el.classList.replace('text-gray-400', 'text-white');
+        }
+      });
     }
 
     document.addEventListener('DOMContentLoaded', fetchOrder);

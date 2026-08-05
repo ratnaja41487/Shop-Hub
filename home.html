@@ -24,15 +24,24 @@
                     <i class="fas fa-shopping-bag"></i> ShopHub
                 </h1>
                 <div class="hidden md:flex items-center bg-gray-100 rounded-lg px-3 py-2 w-[500px]">
-                    <select class="bg-transparent text-sm border-r border-gray-300 pr-2 mr-2 outline-none">
-                        <option>All Categories</option>
-                    </select>
+                    <select
+    onchange="goToCategory(this.value)"
+    class="bg-transparent text-sm border-r border-gray-300 pr-2 mr-2 outline-none">
+
+    <option value="">All Categories</option>
+    <option value="categories.html">All Categories</option>
+    
+
+</select>
                     <input type="text" id="home-search-input" placeholder="Search for products, brands or stores..."
   class="bg-transparent flex-grow outline-none text-sm px-2"
   onkeydown="if(event.key==='Enter') goTosearch()">
 <button onclick="goTosearch()" class="bg-purple-600 text-white p-2 rounded-md hover:bg-purple-700">
   <i class="fas fa-search"></i>
 </button>
+
+            
+
                 </div>
             </div>
             <div class="flex items-center gap-6 text-sm font-medium text-gray-700">
@@ -160,6 +169,13 @@
     const q = document.getElementById('home-search-input').value.trim();
     window.location.href = q ? `search.html?q=${encodeURIComponent(q)}` : 'search.html';
   }
+
+
+  function goToCategory(page) {
+    if (page !== "") {
+        window.location.href = page;
+    }
+}
 </script>
 
     <script src="java script/home.js"></script>
